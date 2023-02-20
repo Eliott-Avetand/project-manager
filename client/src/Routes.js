@@ -1,9 +1,9 @@
-import Archives from './Views/Archives/Archives';
-import Home from './Views/Home/Home';
-import Login from './Views/Login/Login';
-import Sprint from './Views/Sprint/Sprint';
-import Admin from './Views/Admin/Admin';
-import Users from './Views/Forms/Users/Users';
+import Archives from '@views/Archives/Archives';
+import Home from '@views/Home/Home';
+import Login from '@views/Login/Login';
+import Sprint from '@views/Sprint/Sprint';
+import Admin from '@views/Admin/Admin';
+import Users from '@views/Forms/Users/Users';
 
 export const customRoutes = [
     { path: '/login', component: Login },

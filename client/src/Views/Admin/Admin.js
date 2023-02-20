@@ -1,7 +1,7 @@
 import styles from './Admin.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import Image from '../../Assets/Images/Admin_Logo.png';
+import Image from '@assets/Images/Admin_Logo.png';
 import { Link } from 'react-router-dom';
 
 const Admin = () => {

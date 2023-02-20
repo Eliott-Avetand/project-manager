@@ -1,6 +1,6 @@
 import { customRoutes } from './Routes';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './Components/Navbar/Navbar';
+import Navbar from '@components/Navbar/Navbar';
 
 const App = () => {
     const location = useLocation();

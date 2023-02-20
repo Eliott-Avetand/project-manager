@@ -1,8 +1,8 @@
 import styles from './Sprint.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
-import Arrow from '../../Assets/Images/Arrow_Black.png';
-import GreenTick from '../../Assets/Images/Green_Tick.png';
+import Arrow from '@assets/Images/Arrow_Black.png';
+import GreenTick from '@assets/Images/Green_Tick.png';
 
 const Sprint = () => {
     const active = (e) => {

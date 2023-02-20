@@ -1,6 +1,6 @@
 import styles from './Navbar.module.scss';
-import Day from '../../Assets/Images/Day_Logo.png';
-import Arrow from '../../Assets/Images/Arrow_Black.png';
+import Day from '@assets/Images/Day_Logo.png';
+import Arrow from '@assets/Images/Arrow_Black.png';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {

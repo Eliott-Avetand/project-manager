@@ -3,10 +3,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userActions } from '@actions/users.actions';
 import { useState } from 'react';
 
 const Login = () => {
+    const dispatch = useDispatch();
+
     const [seePasword, setSeePasword] = useState(false);
+    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+
+    const handleLogin = () => {
+        const data = {
+            username: username,
+            password: password
+        }
+
+        dispatch(userActions.login(data));
+    }
 
     return (
         <div className={styles.login}>
@@ -15,19 +30,19 @@ const Login = () => {
                 <div className={styles.input}>
                     <h6>Pseudo</h6>
                     <FontAwesomeIcon icon={faUser} />
-                    <input type="text" name="username" placeholder='Votre pseudo' />
+                    <input type="text" name="username" placeholder='Votre pseudo' onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div className={styles.input}>
                     <h6>Mot de passe</h6>
                     <FontAwesomeIcon icon={faLock} />
-                    <input type={ seePasword ? "text" : "password" } name="username" placeholder='Votre mot de passe' />
+                    <input type={ seePasword ? "text" : "password" } name="username" placeholder='Votre mot de passe' onChange={(e) => setPassword(e.target.value)} />
                     <FontAwesomeIcon icon={seePasword ? faEye : faEyeSlash} onClick={(e) => { setSeePasword(!seePasword); }}/>
                 </div>
                 <div className={styles.remember}>
                     <input type='checkbox' defaultChecked={true} />
                     <h6>Se souvenir de moi ?</h6>
                 </div>
-                <input type="submit" value="Se connecter" className={styles.button} />
+                <input type="submit" value="Se connecter" className={styles.button} onClick={handleLogin} />
                 <Link to='/forgot-password'>Mot de passe oublié ?</Link>
             </div>
         </div>

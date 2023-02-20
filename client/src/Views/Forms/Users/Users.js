@@ -1,5 +1,5 @@
 import styles from './Users.module.scss';
-import Admin from '../../../Assets/Images/Admin_Logo.png';
+import Admin from '@assets/Images/Admin_Logo.png';
 
 const Users = () => {
     return (

@@ -1,8 +1,8 @@
 import styles from './Home.module.scss';
-import CurrentSprint from '../../Assets/Images/Current_Sprint_Logo.png';
-import Sprint from '../../Assets/Images/Sprint_Logo.png';
-import Day from '../../Assets/Images/Day_Logo.png';
-import Admin from '../../Assets/Images/Admin_Logo.png';
+import CurrentSprint from '@assets/Images/Current_Sprint_Logo.png';
+import Sprint from '@assets/Images/Sprint_Logo.png';
+import Day from '@assets/Images/Day_Logo.png';
+import Admin from '@assets/Images/Admin_Logo.png';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
