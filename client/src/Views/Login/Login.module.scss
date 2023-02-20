@@ -1,0 +1,105 @@
+.login {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: url('../../Assets/Images/Wallpaper.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .box {
+        width: 500px;
+        background: #FFFFFF;
+        border-radius: 10px;
+        padding: 200px 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h1 {
+            font-size: 50px;
+            margin: 0;
+        }
+        .input {
+            padding-left: 10px;
+            border-bottom: 1px solid #c0c0c0;
+            margin-top: 60px;
+            width: 100%;
+            svg:last-child {
+                float: right;
+                margin-right: 10px;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            svg {
+                font-size: 20px;
+            }
+            h6 {
+                font-size: 12px;
+                margin: 0;
+                margin-bottom: 10px;
+                font-weight: 400;
+            }
+            input {
+                &::placeholder {
+                    opacity: .6;
+                    font-weight: 500;
+                }
+                font-size: 18px;
+                outline: none;
+                border: none;
+                padding-bottom: 10px;
+                padding-left: 10px;
+                width: 80%;
+            }
+        }
+        .remember {
+            display: flex;
+            align-items: center;
+            align-self: flex-start;
+            margin-top: 20px;
+            input {
+                width: 20px;
+                height: 20px;
+                accent-color: #F506FE;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            h6 {
+                margin: 0;
+                opacity: .6;
+                font-weight: 500;
+                font-size: 16px;
+                margin-left: 10px;
+            }
+        }
+        .button {
+            outline: none;
+            border: none;
+            width: 100%;
+            border-radius: 50px;
+            height: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            color: #fff;
+            background: linear-gradient(to left, #F506FE 0%, #05D7DF 100%);
+            margin-top: 60px;
+            box-shadow: 4px 4px 10px 5px rgba(0, 0, 0, 0.25);
+            transition: box-shadow .3s;
+            &:hover {
+                box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.25);
+                cursor: pointer;
+            }
+        }
+        a {
+            margin-top: 30px;
+            color: #000;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
