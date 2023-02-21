@@ -1,15 +1,15 @@
 import { Api } from "@config/Api";
 
 export const userService = {
-    login
+    login,
+    logout
 };
 
 function login(properties) {
-    return Api.post('/login', properties)
-        .then(res => {
-            let user = JSON.parse(res.config.data);
+    return Api.post('/auth/login', properties)
+        .then(res => localStorage.setItem('token', res.access_token));
+}
 
-            localStorage.setItem('user', JSON.stringify({ email: user.username }));
-            return user;
-        });
+function logout() {
+    localStorage.removeItem('token');
 }

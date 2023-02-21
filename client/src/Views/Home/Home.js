@@ -4,13 +4,21 @@ import Sprint from '@assets/Images/Sprint_Logo.png';
 import Day from '@assets/Images/Day_Logo.png';
 import Admin from '@assets/Images/Admin_Logo.png';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userActions } from '@actions/users.actions';
 
 const Home = () => {
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        dispatch(userActions.logout());
+    }
+
     return (
         <div className={styles.home}>
             <div className={styles.top}>
                 <h2>Bienvenue, <strong>El Proyecto Del Jefe</strong></h2>
-                <input type="submit" value="Déconnexion" className={styles.logout} />
+                <input type="submit" value="Déconnexion" className={styles.logout} onClick={logout} />
             </div>
             <div className={styles.dashboard}>
                 <Link to='/current-sprint' className={styles.card}>

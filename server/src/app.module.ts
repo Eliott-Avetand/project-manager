@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 import 'dotenv/config';
 
 @Module({
@@ -15,7 +16,8 @@ import 'dotenv/config';
             entities: [User],
             synchronize: process.env.ENV == 'development'
         }),
-        UsersModule
+        UsersModule,
+        AuthModule
     ],
 })
 

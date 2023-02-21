@@ -38,6 +38,21 @@ export default function userReducer(state = initialState, action) {
                 error: action.error,
                 user: {}
             };
+        // Logout user
+        case 'user/logoutRequest':
+            return {
+                ...state,
+                action: action.type,
+                loading: true
+            };
+        case 'user/logoutSuccess':
+            return {
+                ...state,
+                action: action.type,
+                loading: false,
+                error: {},
+                userInfos: { ...state.userInfos, loggedIn: false }
+            };
         default:
             return state;
     }

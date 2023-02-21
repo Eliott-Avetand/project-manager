@@ -6,10 +6,10 @@ import Admin from '@views/Admin/Admin';
 import Users from '@views/Forms/Users/Users';
 
 export const customRoutes = [
-    { path: '/login', component: Login },
-    { path: '/', component: Home },
-    { path: '/current-sprint', component: Sprint },
-    { path: '/sprints', component: Archives },
-    { path: '/admin', component: Admin },
-    { path: '/create-user', component: Users },
+    { path: '/auth/login', component: Login, type: 'auth' },
+    { path: '/', component: Home, type: 'private' },
+    { path: '/current-sprint', component: Sprint, type: 'private' },
+    { path: '/sprints', component: Archives, type: 'private' },
+    { path: '/admin', component: Admin, type: 'private' },
+    { path: '/create-user', component: Users, type: 'private' },
 ];
