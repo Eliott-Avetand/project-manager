@@ -2,7 +2,8 @@ import { userService } from '@services/users.services';
 
 export const userActions = {
     login,
-    logout
+    logout,
+    clearSuccess
 };
 
 function login(properties) {
@@ -34,4 +35,8 @@ function logout() {
         dispatch(success());
         window.location.href='/auth/login';
     };
+}
+
+function clearSuccess() {
+    return { type: 'user/clearSuccess' };
 }

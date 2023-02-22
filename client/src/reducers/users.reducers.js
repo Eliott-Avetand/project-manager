@@ -1,16 +1,10 @@
-const user = JSON.parse(localStorage.getItem('user'));
+const token = localStorage.getItem('token');
 
 const initialState = {
     action: '',
     loading: false,
     error: {},
-    userInfos: user ?
-    {
-        ...user,
-        loggedIn: true
-    } : {
-        loggedIn: false
-    },
+    userInfos: token ? { loggedIn: true } : { loggedIn: false }
 }
 
 export default function userReducer(state = initialState, action) {
@@ -35,8 +29,7 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 action: action.type,
                 loading: false,
-                error: action.error,
-                user: {}
+                error: action.error
             };
         // Logout user
         case 'user/logoutRequest':
@@ -52,6 +45,12 @@ export default function userReducer(state = initialState, action) {
                 loading: false,
                 error: {},
                 userInfos: { ...state.userInfos, loggedIn: false }
+            };
+        // Clear redux
+        case 'user/clearSuccess':
+            return {
+                ...state,
+                action: action.type
             };
         default:
             return state;

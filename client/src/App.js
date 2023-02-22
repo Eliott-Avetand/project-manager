@@ -1,7 +1,7 @@
 import { customRoutes } from './Routes';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from '@components/Navbar/Navbar';
-import PrivateRoute from '@/components/RouteGuard/PrivateRoute';
+import PrivateRoute from '@components/RouteGuard/PrivateRoute';
 import AuthRoute from '@components/RouteGuard/AuthRoute';
 
 const App = () => {

@@ -10,7 +10,6 @@ export class UsersService {
     constructor(@InjectRepository(User) private user: Repository<User>) {}
 
     create(createUserDto: CreateUserDto) {
-        console.log(createUserDto);
         this.user.save(createUserDto);
     }
 
