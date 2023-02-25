@@ -10,7 +10,8 @@ export const sprintsServices = {
 
 function getAll() {
     return Api.get('/sprints')
-        .then(res => handleResponse(res));
+        .then(res => handleResponse(res))
+        .catch(err => handleError(err));
 }
 
 function getOne(id) {
@@ -36,9 +37,9 @@ function remove(id) {
 const handleResponse = (res) => {
     if (res.status === 200 || res.status === 201)
         return res.data;
-    else if (res.status === 401) {
-        localStorage.removeItem('token');
+}
+
+const handleError = (err) => {
+    if (err.response.status === 401)
         window.location.href='/auth/login';
-    } else
-        return res;
 }

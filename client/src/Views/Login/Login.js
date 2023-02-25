@@ -12,11 +12,11 @@ const Login = () => {
 
     const [seePasword, setSeePasword] = useState(false);
     const [password, setPassword] = useState('');
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
 
     const handleLogin = () => {
         const data = {
-            username: username,
+            email: email,
             password: password
         }
 
@@ -30,7 +30,7 @@ const Login = () => {
                 <div className={styles.input}>
                     <h6>Pseudo</h6>
                     <FontAwesomeIcon icon={faUser} />
-                    <input type="text" name="username" placeholder='Votre pseudo' onChange={(e) => setUsername(e.target.value)} />
+                    <input type="text" name="email" placeholder='Votre email' onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={styles.input}>
                     <h6>Mot de passe</h6>
