@@ -21,6 +21,7 @@ function getAll() {
                 dispatch(success(sprints));
             })
             .catch(error => {
+                console.log(error);
                 dispatch(failure(error));
             }
         );
