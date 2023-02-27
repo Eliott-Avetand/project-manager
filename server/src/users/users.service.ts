@@ -9,27 +9,27 @@ import { User } from './entities/user.entity';
 export class UsersService {
     constructor(@InjectRepository(User) private user: Repository<User>) {}
 
-    create(createUserDto: CreateUserDto) {
-        this.user.save(createUserDto);
+    create(user: User) {
+        return this.user.save(user);
     }
 
     findAll(): Promise<User[]> {
         return this.user.find();
     }
 
-    async findOne(id: number): Promise<User | undefined> {
+    findOne(id: number): Promise<User | undefined> {
         return this.user.findOneBy({ id });
     }
 
-    async findByEmail(email: string): Promise<User | undefined> {
+    findByEmail(email: string): Promise<User | undefined> {
         return this.user.findOneBy({ email });
     }
 
-    update(id: number, updateUserDto: UpdateUserDto) {
-        this.user.update(id, updateUserDto);
+    update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+        return this.user.save({ ...updateUserDto, id: id });
     }
 
-    async remove(id: number) {
-        await this.user.delete(id);
+    remove(id: number) {
+        return this.user.delete(id);
     }
 }

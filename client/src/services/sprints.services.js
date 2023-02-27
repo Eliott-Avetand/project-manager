@@ -1,4 +1,5 @@
 import { Api } from "@config/Api";
+import Cookies from "js-cookie";
 
 export const sprintsServices = {
     getAll,
@@ -40,6 +41,9 @@ const handleResponse = (res) => {
 }
 
 const handleError = (err) => {
-    if (err.response.status === 401)
+    if (err.response.status === 401) {
+        Cookies.remove('token');
         window.location.href='/auth/login';
+    }
+    throw err;
 }

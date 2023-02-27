@@ -28,7 +28,7 @@ const CreateSprints = () => {
             dispatch(sprintActions.clearSuccess());
             setIsSuccessful(true);
         }
-    }, [sprints]);
+    }, [sprints, dispatch]);
     
     if (isSuccessful)
         return <Navigate to='/sprints' />

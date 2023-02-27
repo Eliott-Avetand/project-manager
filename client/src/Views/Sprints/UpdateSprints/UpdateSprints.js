@@ -3,7 +3,6 @@ import { sprintActions } from '@actions/sprints.actions';
 import styles from './UpdateSprints.module.scss';
 import { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import moment from 'moment';
 
 const UpdateSprints = () => {
     const dispatch = useDispatch();
@@ -31,7 +30,7 @@ const UpdateSprints = () => {
 
     useEffect(() => {
         dispatch(sprintActions.getOne(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
     
     useEffect(() => {
         if (sprintsReducer.action === 'sprints/updateSuccess') {
@@ -43,7 +42,7 @@ const UpdateSprints = () => {
             setStartDate(formatDate(sprintsReducer.sprint.startDate));
             setEndDate(formatDate(sprintsReducer.sprint.endDate));
         }
-    }, [sprintsReducer]);
+    }, [sprintsReducer, dispatch]);
 
     const updateSprint = () => {
         const data = {

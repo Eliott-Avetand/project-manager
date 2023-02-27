@@ -9,6 +9,7 @@ import { User } from './users/entities/user.entity';
 import { Sprint } from './sprints/entities/sprint.entity';
 import { Card } from './cards/entities/card.entity';
 import { Task } from './tasks/entities/task.entity';
+import { File } from './Files/entities/file.entity';
 import 'dotenv/config';
 
 @Module({
@@ -19,7 +20,7 @@ import 'dotenv/config';
             username: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
             database: process.env.DB_DATABASE,
-            entities: [User, Sprint, Card, Task],
+            entities: [User, Sprint, Card, Task, File],
             synchronize: process.env.ENV == 'development'
         }),
         UsersModule,
