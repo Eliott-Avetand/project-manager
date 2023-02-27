@@ -6,9 +6,14 @@ import Admin from '@assets/Images/Admin_Logo.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userActions } from '@actions/users.actions';
+import { useContext } from 'react';
+import ThemeContext from '@styles/ThemeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 
 const Home = () => {
     const dispatch = useDispatch();
+    const { isDark, toggleDark } = useContext(ThemeContext);
 
     const logout = () => {
         dispatch(userActions.logout());
@@ -31,10 +36,10 @@ const Home = () => {
                     <h3>Sprint</h3>
                     <p>See all previous sprint or create a new one.</p>
                 </Link>
-                <div className={styles.card}>
-                    <img src={Day} alt="Day / Night Cycle" />
-                    <h3>Day</h3>
-                    <p>You are currently in light mode. Click to change to dark mode.</p>
+                <div className={styles.card} onClick={toggleDark}>
+                    <FontAwesomeIcon icon={isDark ? faMoon : faSun} />
+                    <h3>{isDark ? "Night" : "Day"}</h3>
+                    <p>{isDark ? "You are currently in dark mode. Click to change to light mode." : "You are currently in light mode. Click to change to dark mode."}</p>
                 </div>
                 <Link to='/admin' className={styles.card}>
                     <img src={Admin} alt="Admin panel" />

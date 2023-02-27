@@ -3,10 +3,13 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from '@components/Navbar/Navbar';
 import PrivateRoute from '@components/RouteGuard/PrivateRoute';
 import AuthRoute from '@components/RouteGuard/AuthRoute';
+import { useContext } from 'react';
+import ThemeContext from '@styles/ThemeContext';
 
 const App = () => {
     const location = useLocation();
-    const noNavbar = ['/', '/auth/login']
+    const noNavbar = ['/', '/auth/login'];
+    const { isDark } = useContext(ThemeContext);
 
     const routes = customRoutes.map((route, index) => {
         const Component = route.component;
@@ -37,8 +40,9 @@ const App = () => {
             )
     });
 
+    console.log(isDark);
     return (
-        <div style={{ height: '100%', width: '100%' }}>
+        <div style={{ height: '100%', width: '100%' }} className={`${isDark ? 'theme--dark' : 'theme--light'}`}>
             { noNavbar.includes(location.pathname) ? <></> : <Navbar /> }
             <Routes>
                 {routes}
