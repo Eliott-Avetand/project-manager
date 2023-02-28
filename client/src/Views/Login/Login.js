@@ -2,19 +2,28 @@ import styles from './Login.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '@actions/users.actions';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Login = () => {
     const dispatch = useDispatch();
+    const action = useSelector(state => state.userReducer.action);
 
     const [seePasword, setSeePasword] = useState(false);
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [isLogin, setIsLogin] = useState(false);
 
-    const handleLogin = () => {
+    useEffect(() => {
+        if (action === 'user/loginSuccess')
+            setIsLogin(true);
+    }, [dispatch, setIsLogin, action]);
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+
         const data = {
             email: email,
             password: password
@@ -23,28 +32,31 @@ const Login = () => {
         dispatch(userActions.login(data));
     }
 
+    if (isLogin)
+        return <Navigate to='/' />
+
     return (
         <div className={styles.login}>
-            <div className={styles.box}>
-                <h1>Login</h1>
+            <form className={styles.box}>
+                <h1>Sign In</h1>
                 <div className={styles.input}>
-                    <h6>Pseudo</h6>
+                    <label htmlFor='email'>Email</label>
                     <FontAwesomeIcon icon={faUser} />
-                    <input type="text" name="email" placeholder='Votre email' onChange={(e) => setEmail(e.target.value)} />
+                    <input type="text" name="email" placeholder='Your email' onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className={styles.input}>
-                    <h6>Mot de passe</h6>
+                    <label htmlFor='password'>Password</label>
                     <FontAwesomeIcon icon={faLock} />
-                    <input type={ seePasword ? "text" : "password" } name="username" placeholder='Votre mot de passe' onChange={(e) => setPassword(e.target.value)} />
+                    <input type={ seePasword ? "text" : "password" } name="password" placeholder='Your password' onChange={(e) => setPassword(e.target.value)} />
                     <FontAwesomeIcon icon={seePasword ? faEye : faEyeSlash} onClick={(e) => { setSeePasword(!seePasword); }}/>
                 </div>
                 <div className={styles.remember}>
-                    <input type='checkbox' defaultChecked={true} />
-                    <h6>Se souvenir de moi ?</h6>
+                    <input type='checkbox' name='remember' defaultChecked={true} />
+                    <label htmlFor='remember'>Remember me ?</label>
                 </div>
-                <input type="submit" value="Se connecter" className={styles.button} onClick={handleLogin} />
-                <Link to='/forgot-password'>Mot de passe oublié ?</Link>
-            </div>
+                <input type="submit" value="Sign In" className={styles.button} onClick={handleLogin} />
+                <Link to='/forgot-password'>Forgot password ?</Link>
+            </form>
         </div>
     );
 }

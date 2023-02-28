@@ -1,4 +1,5 @@
 import { userService } from '@services/users.services';
+import { toast } from 'react-toastify';
 
 export const userActions = {
     login,
@@ -20,10 +21,11 @@ function login(properties) {
         userService.login(properties)
             .then(user => {
                 dispatch(success(user));
-                window.location.href='/';
+                toast.success('Successfully logged in!');
             })
             .catch(error => {
                 dispatch(failure(error));
+                toast.error(error?.response?.data?.message);
             }
         );
     };
@@ -37,7 +39,7 @@ function logout() {
         dispatch(request());
         userService.logout()
         dispatch(success());
-        window.location.href='/auth/login';
+        toast.info('Successfully logged out!');
     };
 }
 

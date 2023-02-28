@@ -54,7 +54,8 @@ const handleResponse = (res) => {
 const handleError = (err) => {
     if (err.response.status === 401) {
         Cookies.remove('token');
-        window.location.href='/auth/login';
+        if (window.location.pathname !== '/auth/login')
+            window.location.href='/auth/login';
     }
     throw err;
 }

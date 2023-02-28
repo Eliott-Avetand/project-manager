@@ -12,7 +12,6 @@ export const ThemeContextProvider = ({ children }) => {
 
     useEffect(() => {
         const isDark = JSON.parse(localStorage.getItem('ThemeContext:isDark'));
-        console.log(isDark);
 
         if (isDark !== null && isDark !== undefined)
             setIsDark(isDark);
@@ -22,7 +21,6 @@ export const ThemeContextProvider = ({ children }) => {
 
     const context = {
         toggleDark: () => {
-            console.log(!isDark);
             localStorage.setItem('ThemeContext:isDark', String(!isDark));
             setIsDark(!isDark);
         },

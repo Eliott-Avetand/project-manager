@@ -1,10 +1,16 @@
 $themes: (
-    "light": (primary: #fbf7f4,
+    "light": (
+        primary: #fbf7f4,
         secondary: #fff,
-        text: #191918),
-    "dark": (primary: #323131,
+        button: #191918,
+        text: #191918
+    ),
+    "dark": (
+        primary: #323131,
         secondary: #191918,
-        text: #fbf7f4),
+        button: #fbf7f4,
+        text: #fbf7f4
+    ),
 );
 
 @mixin themed() {

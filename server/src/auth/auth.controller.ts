@@ -3,7 +3,6 @@ import { Response } from 'express';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { AuthService } from './auth.service';
-import { jwtConstants } from './constants';
 import { AuthDto } from './dto/auth.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
