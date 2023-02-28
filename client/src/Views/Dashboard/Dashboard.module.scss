@@ -1,0 +1,268 @@
+@import "../../styles/theme";
+
+.home {
+    @include themed {
+        background: t('primary');
+    }
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    .current {
+        width: 700px;
+        height: 100%;
+        padding: 30px;
+        box-sizing: border-box;
+        @include themed {
+            background: t('secondary');
+        }
+        h3 {
+            margin: 0;
+            margin-bottom: 5px;
+            font-size: 18px;
+            font-weight: 400;
+            @include themed {
+                color: t('text');
+            }
+        }
+        i {
+            font-size: 12px;
+            font-style: normal;
+            opacity: .6;
+            @include themed {
+                color: t('text');
+            }
+        }
+        h2 {
+            margin-top: 50px;
+            @include themed {
+                color: t('text');
+            }
+        }
+        .update {
+            display: flex;
+            align-items: center;
+            .profile {
+                display: flex;
+                font-size: 14px;
+                margin-right: 100px;
+                @include themed {
+                    color: t('text');
+                }
+                img {
+                    border-radius: 50%;
+                    width: 50px;
+                    height: 50px;
+                    margin-right: 20px;
+                }
+            }
+            .date {
+                @include themed {
+                    color: t('text');
+                    border-left: 1px solid t('text');
+                }
+                padding-left: 20px;
+                font-size: 12px;
+                p {
+                    margin: 0;
+                    &:last-child {
+                        opacity: .6;
+                    }
+                }
+            }
+        }
+        .cards {
+            margin-top: 100px;
+            width: 100%;
+            height: 250px;
+            @include themed {
+                background: linear-gradient(127.34deg, t('gradientColor1') 9.81%, t('gradientColor2') 73.13%);
+            }
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            @include themed {
+                color: t('text');
+            }
+            h4 {
+                margin: 0;
+                font-size: 18px;
+                font-weight: 500;
+                margin-bottom: 5px;
+            }
+            p {
+                font-size: 14px;
+                font-weight: 200;
+                margin: 0;
+            }
+            a {
+                text-decoration: none;
+                text-transform: uppercase;
+                font-size: 12px;
+                font-weight: 600;
+                width: fit-content;
+                padding: 5px 20px;
+                @include themed {
+                    color: t('text');
+                    border: 1px solid t('text');
+                }
+            }
+        }
+        .cardsInfos {
+            position: relative;
+            margin-top: 30px;
+            display: flex;
+            @include themed {
+                color: t('text');
+            }
+            & > div {
+                width: 100%;
+                height: 240px;
+                @include themed {
+                    background: linear-gradient(127.34deg, t('gradientColor3') 9.81%, t('gradientColor2') 73.13%);
+                }
+                padding: 20px;
+                h4 {
+                    font-size: 18px;
+                    font-weight: 500;
+                    margin: 0;
+                }
+                p {
+                    font-size: 16px;
+                    font-weight: 300;
+                }
+                &:last-child {
+                    margin-left: 30px;
+                    @include themed {
+                        background: linear-gradient(127.34deg, t('gradientColor2') 9.81%, t('gradientColor3') 73.13%);
+                    }
+                }
+            }
+        }
+    }
+    .personal {
+        padding: 30px 60px;
+        @include themed {
+            color: t('text');
+        }
+        .updates {
+            width: 100%;
+            h3 {
+                font-size: 22px;
+                font-weight: 400;
+                margin: 0;
+            }
+            .card {
+                position: relative;
+                @include themed {
+                    border: 1px solid t('text');
+                }
+                padding: 10px 20px;
+                display: flex;
+                flex-direction: column;
+                margin-top: 30px;
+                justify-content: space-between;
+                & > div:last-child {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 50px;
+                }
+                .time {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    font-style: normal;
+                }
+                .id {
+                    font-style: normal;
+                    opacity: .6;
+                }
+                h6 {
+                    margin: 0;
+                    font-weight: 400;
+                    font-size: 18px;
+                }
+                a {
+                    text-decoration: none;
+                    position: relative;
+                    @include themed {
+                        color: t('text');
+                    }
+                    &:hover {
+                        &:after {
+                            left: 0;
+                            width: 80%;
+                        }
+                    }
+                    &:after {
+                        content: '';
+                        transition: width .4s;
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        height: 1px;
+                        width: 0;
+                        @include themed {
+                            background: t('text');
+                        }
+                    }
+                }
+                p {
+                    margin: 0;
+                }
+            }
+        }
+        .statistics {
+            width: 100%;
+            margin-top: 60px;
+            h3 {
+                font-size: 22px;
+                font-weight: 400;
+                margin: 0;
+            }
+            p {
+                margin: 0;
+                font-weight: 300;
+                font-size: 16px;
+                opacity: .6;
+            }
+            .statBlocs {
+                margin-top: 30px;
+                display: flex;
+                flex-wrap: wrap;
+                .bloc {
+                    display: flex;
+                    align-items: center;
+                    width: 50%;
+                    margin-bottom: 30px;
+                    .visual {
+                        @include themed {
+                            border: 1px solid t('text');
+                        }
+                        width: 60px;
+                        height: 60px;
+                    }
+                    .info {
+                        margin-left: 20px;
+                        h6 {
+                            font-size: 18px;
+                            font-weight: 400;
+                            margin: 0;
+                            margin-bottom: 5px;
+                        }
+                        p {
+                            font-size: 14px;
+                            margin: 0;
+                            font-weight: 400;
+                            opacity: .6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

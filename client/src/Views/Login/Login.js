@@ -33,7 +33,7 @@ const Login = () => {
     }
 
     if (isLogin)
-        return <Navigate to='/' />
+        return <Navigate to='/dashboard' />
 
     return (
         <div className={styles.login}>

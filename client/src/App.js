@@ -1,6 +1,6 @@
 import { customRoutes } from './Routes';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import Navbar from '@components/Navbar/Navbar';
+import Sidebar from '@components/Sidebar/Sidebar';
 import PrivateRoute from '@components/RouteGuard/PrivateRoute';
 import AuthRoute from '@components/RouteGuard/AuthRoute';
 import { useContext, useEffect, useState } from 'react';
@@ -8,11 +8,12 @@ import ThemeContext from '@styles/ThemeContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from './App.module.scss';
 
 const App = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const noNavbar = ['/', '/auth/login'];
+    const noNavbar = ['/auth/login'];
     const { isDark } = useContext(ThemeContext);
     const [isLogout, setIsLogout] = useState(false);
     const action = useSelector(state => state.userReducer.action);
@@ -57,8 +58,8 @@ const App = () => {
     }
 
     return (
-        <div style={{ height: '100%', width: '100%' }} className={`${isDark ? 'theme--dark' : 'theme--light'}`}>
-            { noNavbar.includes(location.pathname) ? <></> : <Navbar /> }
+        <div className={`${styles.app} ${isDark ? 'theme--dark' : 'theme--light'}`}>
+            { noNavbar.includes(location.pathname) ? <></> : <Sidebar /> }
             <ToastContainer />
             <Routes>
                 {routes}

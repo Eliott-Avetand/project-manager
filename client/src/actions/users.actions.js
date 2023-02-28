@@ -31,15 +31,23 @@ function login(properties) {
     };
 }
 
-function logout() {
+function logout(properties) {
     const request = () => ({ type: 'user/logoutRequest' });
-    const success = () => ({ type: 'user/logoutSuccess' });
+    const success = (user) => ({ type: 'user/logoutSuccess', user });
+    const failure = (error) => ({ type: 'user/logoutFailure', error });
 
     return dispatch => {
         dispatch(request());
-        userService.logout()
-        dispatch(success());
-        toast.info('Successfully logged out!');
+        userService.logout(properties)
+            .then(user => {
+                dispatch(success(user));
+                toast.info('Successfully logged out!');
+            })
+            .catch(error => {
+                dispatch(failure(error));
+                toast.error(error?.response?.data?.message ? error.response.data.message : 'An error occured');
+            }
+        );
     };
 }
 

@@ -10,7 +10,7 @@ const AuthRoute = ({ children }) => {
         return flag;
     }
 
-    return hasJWT() ? <Navigate to='/' /> : children
+    return hasJWT() ? <Navigate to='/dashboard' /> : children
 };
  
 export default AuthRoute;
