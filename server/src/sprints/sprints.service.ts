@@ -11,6 +11,7 @@ export class SprintsService {
 
     create(createSprintDto: CreateSprintDto) {
         this.sprint.save(createSprintDto);
+        return createSprintDto;
     }
 
     findAll(): Promise<Sprint[]> {
@@ -23,6 +24,7 @@ export class SprintsService {
 
     update(id: number, updateSprintDto: UpdateSprintDto) {
         this.sprint.update(id, updateSprintDto);
+        return updateSprintDto;
     }
 
     async remove(id: number) {

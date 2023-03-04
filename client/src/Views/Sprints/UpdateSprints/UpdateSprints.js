@@ -44,7 +44,9 @@ const UpdateSprints = () => {
         }
     }, [sprintsReducer, dispatch]);
 
-    const updateSprint = () => {
+    const updateSprint = (e) => {
+        e.preventDefault();
+
         const data = {
             title: title,
             startDate: startDate,
@@ -58,7 +60,7 @@ const UpdateSprints = () => {
         return <Navigate to='/sprints' />
 
     return (
-        <div className={styles.create}>
+        <div className={styles.update}>
             <div className={styles.box}>
                 <h1>Update the sprint</h1>
                 <label>

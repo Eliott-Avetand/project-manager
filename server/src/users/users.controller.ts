@@ -12,10 +12,8 @@ import { jwtConstants } from 'src/auth/constants';
 import { JwtUser } from './decorators/users.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { File } from 'src/Files/entities/file.entity';
 import { FileService } from 'src/Files/files.service';
 import { createReadStream } from 'fs';
-import { Response } from 'express';
 
 @Controller('users')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -115,10 +113,19 @@ export class UsersController {
         const users: any[] = await this.usersService.findAll();
 
         users.forEach(user => {
-            user.profile = new StreamableFile(createReadStream(`${user.picture.path}/${user.picture.filename}`));
-        })
+            if (user?.picture?.path && user?.picture?.filename)
+                user.picture = new StreamableFile(createReadStream(`${user.picture.path}/${user.picture.filename}`));
+            else
+                user.picture = null;
+        });
         
         return users;
+    }
+
+    @Get('profil')
+    @Roles(Role.Viewer)
+    async profil(@JwtUser() user: User) {
+        return user;
     }
 
     @Get(':id')
@@ -126,6 +133,8 @@ export class UsersController {
     async findOne(@Param('id') id: string, @JwtUser() currentUser: User): Promise<User> {
         if ((currentUser.role === Role.User || currentUser.role === Role.Viewer) && +id !== currentUser.id)
             throw new UnauthorizedException();
+        if (!+id)
+            throw new BadRequestException();
         
         const user: User = await this.usersService.findOne(+id);
 
@@ -139,7 +148,9 @@ export class UsersController {
     async update(@Param('id') id: string, @JwtUser() currentUser: User, @Body() updateUserDto: UpdateUserDto) {
         if (currentUser.role === Role.User && +id !== currentUser.id)
             throw new UnauthorizedException();
-        
+        if (!+id)
+            throw new BadRequestException();
+
         const user: User = await this.usersService.findOne(+id);
 
         if (user === undefined)
@@ -160,6 +171,8 @@ export class UsersController {
     async remove(@Param('id') id: string, @JwtUser() currentUser: User) {
         if (currentUser.role === Role.User && +id !== currentUser.id)
             throw new UnauthorizedException();
+        if (!+id)
+            throw new BadRequestException();
         
         const user: User = await this.usersService.findOne(+id);
 

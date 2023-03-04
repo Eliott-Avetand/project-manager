@@ -52,6 +52,28 @@ export default function sprintsReducer(state = initialState, action) {
                 loading: false,
                 error: action.error
             };
+        // Sprints getCurrent
+        case 'sprints/getCurrentRequest':
+            return {
+                ...state,
+                action: action.type,
+                loading: true
+            };
+        case 'sprints/getCurrentSuccess':
+            return {
+                ...state,
+                action: action.type,
+                loading: false,
+                error: {},
+                sprint: action.sprint
+            };
+        case 'sprints/getCurrentFailure':
+            return {
+                ...state,
+                action: action.type,
+                loading: false,
+                error: action.error
+            };
         // Sprints create
         case 'sprints/createRequest':
             return {

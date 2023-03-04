@@ -5,9 +5,13 @@ export const userActions = {
     login,
     logout,
     create,
+    update,
     getAll,
+    getOne,
+    profil,
     setProfilePicture,
     getProfilePicture,
+    remove,
     clearSuccess
 };
 
@@ -45,7 +49,6 @@ function logout(properties) {
             })
             .catch(error => {
                 dispatch(failure(error));
-                toast.error(error?.response?.data?.message ? error.response.data.message : 'An error occured');
             }
         );
     };
@@ -61,6 +64,26 @@ function create(properties) {
         userService.create(properties)
             .then(user => {
                 dispatch(success(user));
+                toast.success(`The user '${properties.username}' has been created.`);
+            })
+            .catch(error => {
+                dispatch(failure(error));
+            }
+        );
+    };
+}
+
+function update(properties, id) {
+    const request = () => ({ type: 'user/updateRequest' });
+    const success = () => ({ type: 'user/updateSuccess' });
+    const failure = (error) => ({ type: 'user/updateFailure', error });
+
+    return dispatch => {
+        dispatch(request());
+        userService.update(properties, id)
+            .then(() => {
+                dispatch(success());
+                toast.success(`The user '${properties.username}' has been changed.`);
             })
             .catch(error => {
                 dispatch(failure(error));
@@ -79,6 +102,42 @@ function getAll() {
         userService.getAll()
             .then(users => {
                 dispatch(success(users));
+            })
+            .catch(error => {
+                dispatch(failure(error));
+            }
+        );
+    };
+}
+
+function getOne(id) {
+    const request = () => ({ type: 'user/getOneRequest' });
+    const success = (user) => ({ type: 'user/getOneSuccess', user });
+    const failure = (error) => ({ type: 'user/getOneFailure', error });
+
+    return dispatch => {
+        dispatch(request());
+        userService.getOne(id)
+            .then(user => {
+                dispatch(success(user));
+            })
+            .catch(error => {
+                dispatch(failure(error));
+            }
+        );
+    };
+}
+
+function profil() {
+    const request = () => ({ type: 'user/profilRequest' });
+    const success = (user) => ({ type: 'user/profilSuccess', user });
+    const failure = (error) => ({ type: 'user/profilFailure', error });
+
+    return dispatch => {
+        dispatch(request());
+        userService.profil()
+            .then(user => {
+                dispatch(success(user));
             })
             .catch(error => {
                 dispatch(failure(error));
@@ -115,6 +174,25 @@ function getProfilePicture(id) {
         userService.getProfilePicture(id)
             .then(file => {
                 dispatch(success(file));
+            })
+            .catch(error => {
+                dispatch(failure(error));
+            }
+        );
+    };
+}
+
+function remove(username, id) {
+    const request = () => ({ type: 'user/removeRequest' });
+    const success = () => ({ type: 'user/removeSuccess', id });
+    const failure = (error) => ({ type: 'user/removeFailure', error });
+
+    return dispatch => {
+        dispatch(request());
+        userService.remove(id)
+            .then(() => {
+                dispatch(success());
+                toast.success(`The user '${username}' has been removed.`);
             })
             .catch(error => {
                 dispatch(failure(error));

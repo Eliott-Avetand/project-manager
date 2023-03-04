@@ -3,6 +3,7 @@ import { sprintActions } from '@actions/sprints.actions';
 import styles from './CreateSprints.module.scss';
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { userActions } from '@actions/users.actions';
 
 const CreateSprints = () => {
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const CreateSprints = () => {
 
     return (
         <div className={styles.create}>
-            <div className={styles.box}>
+            <form className={styles.box}>
                 <h1>Create a sprint</h1>
                 <label>
                     Name
@@ -50,7 +51,7 @@ const CreateSprints = () => {
                     <input type="date" onChange={(e) => setEndDate(e.target.value)} />
                 </label>
                 <input type="submit" value="Create sprint" className={styles.button} onClick={createSprint} />
-            </div>
+            </form>
         </div>
     );
 }

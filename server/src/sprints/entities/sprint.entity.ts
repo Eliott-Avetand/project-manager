@@ -1,6 +1,6 @@
 import { Card } from "src/cards/entities/card.entity";
 import { Entities } from "src/utilities/GenericEntities";
-import { Column, Entity, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany } from "typeorm";
 
 @Entity()
 export class Sprint extends Entities {
@@ -14,5 +14,6 @@ export class Sprint extends Entities {
     endDate: Date;
 
     @OneToMany(() => Card, card => card.sprint)
+    @JoinColumn()
     cards: Card[]
 }

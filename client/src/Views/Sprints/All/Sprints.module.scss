@@ -1,146 +1,210 @@
+@import "../../../styles/theme";
+
 .sprints {
+    @include themed {
+        background: t('primary');
+    }
     width: 100%;
     height: 100vh;
-    overflow: hidden;
-    background: url('../../../assets/Images/Wallpaper.png') no-repeat center center fixed;
-    background-size: cover;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
     box-sizing: border-box;
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+        @include themed {
+            background: t('secondary');
+        }
+    }
+    &::-webkit-scrollbar-thumb {
+        @include themed {
+            background: t('button');
+        }
+    }
+    flex-direction: column;
+    .searchBar {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        padding: 20px 10px;
+        box-sizing: border-box;
+        @include themed {
+            background: t('secondary');
+        }
+        svg {
+            font-size: 22px;
+            margin-right: 15px;
+            opacity: .6;
+            @include themed {
+                color: t('text');
+            };
+        }
+        input {
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 16px;
+            font-weight: 500;
+            width: 100%;
+            @include themed {
+                color: t('text');
+            }
+        }
+    }
     .title {
-        margin-top: 150px;
-        text-align: center;
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        @include themed {
+            color: t('text');
+        }
         h2 {
             margin: 0;
-            margin-bottom: 5px;
-            font-size: 30px;
-            letter-spacing: 2px;
-            color: #FFFFFF;
         }
-        & > div {
+        & > a {
+            margin-left: 50px;
             display: flex;
             align-items: center;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 10px;
+            opacity: .6;
+            padding: 0px 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
             &:hover {
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 10px;
-                cursor: pointer;
-            }
-            a {
-                text-decoration: none;
-                font-size: 20px;
-                font-weight: 400;
-                letter-spacing: 2px;
-                margin: 0;
-                color: #fff;
+                opacity: 1;
             }
             svg {
-                color: #000;
-                padding: 10px;
-                width: 20px;
-                height: 20px;
-                background: #FFFFFF;
-                border-radius: 50%;
+                margin: 0;
                 margin-right: 10px;
+                padding: 5px;
+                border-radius: 50%;
+                @include themed {
+                    color: t('primary');
+                    background: t('button');
+                };
+            }
+            p {
+                @include themed {
+                    color: t('text');
+                };
             }
         }
     }
     .sprints {
-        height: 70%;
         display: flex;
+        flex-direction: row;
+        justify-content: space-around;
         flex-wrap: wrap;
-        justify-content: space-evenly;
-        align-content: flex-start;
-        margin-top: 50px;
-        overflow: auto;
-        &::-webkit-scrollbar {
-            display: none;
-        }
+        padding: 0;
+        margin-top: 30px;
         .card {
-            text-decoration: none;
-            width: 25%;
-            margin-bottom: 50px;
-            color: #000;
-            background: #FFFFFF;
-            position: relative;
-            border-radius: 10px;
-            padding: 20px 40px;
-            box-shadow: 4px 4px 10px 5px rgba(0, 0, 0, 0.25);
-            transition: box-shadow .3s;
-            &:hover {
-                box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.25);
-                & > svg {
-                    display: block;
-                }
-            }
-            &.passed {
-                opacity: .6;
-            }
-            .infos {
+            padding: 10px;
+            margin: 20px 0;
+            width: 30%;
+            height: fit-content;
+            @include themed {
+                background: t('secondary');
+            };
+            .tools {
+                margin-bottom: 20px;
                 display: flex;
-                justify-content: space-between;
-                .seeMore {
-                    position: relative;
-                    font-size: 16px;
-                    text-decoration: none;
-                    color: #000;
+                justify-content: flex-end;
+                svg {
+                    margin: 0px 5px;
+                    font-size: 18px;
+                    opacity: .6;
+                    @include themed {
+                        color: t('text');
+                    };
                     &:hover {
-                        &::after {
-                            width: 100%;
-                        }
+                        opacity: 1;
+                        cursor: pointer;
                     }
-                    &::after {
-                        content: '';
-                        transition: width .4s;
-                        width: 60%;
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        height: 1px;
-                        background: #000;
-                    }
-                }
-            }
-            svg {
-                display: none;
-                position: absolute;
-                top: 0;
-                right: 0;
-                padding: 10px;
-                margin: 5px;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                transition: color .4s;
-                cursor: pointer;
-                &:first-child {
-                    right: 40px;
-                }
-                &:nth-last-child(2n):hover {
-                    color: red;
-                }
-                &:hover {
-                    background: rgba(0, 0, 0, 0.1);
                 }
             }
             h6 {
-                font-size: 20px;
-                margin: 0;
-                margin-bottom: 10px;
-            }
-            p {
                 font-size: 18px;
+                font-weight: 400;
                 margin: 0;
-                margin-bottom: 10px;
-                &.current {
-                    color: rgb(37, 185, 37);
-                    font-weight: bold;
-                    margin: 0;
+                @include themed {
+                    color: t('text');
+                };
+            }
+            .time {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .date {
+                    display: flex;
+                    align-items: center;
+                    font-size: 16px;
+                    opacity: .8;
+                    @include themed {
+                        color: t('text');
+                    };
+                    svg {
+                        font-size: 5px;
+                        margin: 0px 20px;
+                    }
+                    p {
+                        margin: 20px 0 10px;
+                    }
                 }
-                &.passed {
-                    color: red;
-                    margin: 0;
+                .progressBar {
+                    width: 100%;
+                    height: 5px;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    @include themed {
+                        background: rgba(0, 0, 0, .5);
+                    };
+                    .done {
+                        height: 5px;
+                        border-radius: 10px;
+                        &.progress {
+                            @include themed {
+                                background: t('success');
+                            };
+                        }
+                        &.nearEnd {
+                            @include themed {
+                                background: t('warning');
+                            };
+                        }
+                        &.finished {
+                            @include themed {
+                                background: t('error');
+                            };
+                        }
+                    }
+                }
+                & > p {
+                    margin-top: 10px;
+                    align-self: start;
+                    @include themed {
+                        color: t('text');
+                    };
+                }
+            }
+            .update {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 50px;
+                p {
+                    opacity: .6;
+                    @include themed {
+                        color: t('text');
+                    };
+                }
+                img {
+                    width: 40px;
+                    border-radius: 50%;
                 }
             }
         }

@@ -1,8 +1,10 @@
 import { sprintsServices } from "@services/sprints.services";
+import { toast } from "react-toastify";
 
 export const sprintActions = {
     getAll,
     getOne,
+    getCurrent,
     create,
     update,
     remove,
@@ -46,16 +48,35 @@ function getOne(id) {
     };
 }
 
+function getCurrent() {
+    const request = () => ({ type: 'sprints/getCurrentRequest' });
+    const success = (sprint) => ({ type: 'sprints/getCurrentSuccess', sprint });
+    const failure = (error) => ({ type: 'sprints/getCurrentFailure', error });
+
+    return dispatch => {
+        dispatch(request());
+        sprintsServices.getCurrent()
+            .then(sprint => {
+                dispatch(success(sprint));
+            })
+            .catch(error => {
+                dispatch(failure(error));
+            }
+        );
+    };
+}
+
 function create(properties) {
     const request = () => ({ type: 'sprints/createRequest' });
-    const success = (sprints) => ({ type: 'sprints/createSuccess', sprints });
+    const success = (sprint) => ({ type: 'sprints/createSuccess', sprint });
     const failure = (error) => ({ type: 'sprints/createFailure', error });
 
     return dispatch => {
         dispatch(request());
         sprintsServices.create(properties)
-            .then(sprints => {
-                dispatch(success(sprints));
+            .then(sprint => {
+                dispatch(success(sprint));
+                toast.success(`The sprint '${sprint.title}' has been created.`);
             })
             .catch(error => {
                 dispatch(failure(error));
@@ -66,14 +87,15 @@ function create(properties) {
 
 function update(properties, id) {
     const request = () => ({ type: 'sprints/updateRequest' });
-    const success = (sprints) => ({ type: 'sprints/updateSuccess', sprints, id });
+    const success = (sprint) => ({ type: 'sprints/updateSuccess', sprint, id });
     const failure = (error) => ({ type: 'sprints/updateFailure', error });
 
     return dispatch => {
         dispatch(request());
         sprintsServices.update(properties, id)
-            .then(sprints => {
-                dispatch(success(sprints));
+            .then(sprint => {
+                dispatch(success(sprint));
+                toast.success(`The sprint '${sprint.title}' has been updated.`);
             })
             .catch(error => {
                 dispatch(failure(error));
@@ -82,16 +104,17 @@ function update(properties, id) {
     };
 }
 
-function remove(id) {
+function remove(name, id) {
     const request = () => ({ type: 'sprints/removeRequest' });
-    const success = (sprints) => ({ type: 'sprints/removeSuccess', sprints, id });
+    const success = () => ({ type: 'sprints/removeSuccess', id });
     const failure = (error) => ({ type: 'sprints/removeFailure', error });
 
     return dispatch => {
         dispatch(request());
         sprintsServices.remove(id)
-            .then(sprints => {
-                dispatch(success(sprints));
+            .then(() => {
+                dispatch(success());
+                toast.success(`The sprint '${name}' has been removed.`);
             })
             .catch(error => {
                 dispatch(failure(error));

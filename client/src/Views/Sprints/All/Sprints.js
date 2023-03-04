@@ -1,11 +1,12 @@
 import styles from './Sprints.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faEye, faPen, faPlus, faSearch, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { sprintActions } from '@actions/sprints.actions';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
+import defaultPicture from '@assets/Images/defaultPicture.png';
 
 const Sprints = () => {
     const dispatch = useDispatch();
@@ -19,43 +20,60 @@ const Sprints = () => {
         return false;
     }
 
-    const updateSprint = (id) => {
-        setIsUpdate(true);
-        setUpdateSprintId(id);
-    }
-
-    const deleteSprint = (id) => {
-        dispatch(sprintActions.remove(id))
+    const deleteSprint = (name, id) => {
+        dispatch(sprintActions.remove(name, id))
     }
 
     useEffect(() => {
         dispatch(sprintActions.getAll());
     }, [dispatch]);
 
-    if (isUpdate)
-        return <Navigate to={`/update-sprint/${updateSprintId}`} />
-
     return (
         <div className={styles.sprints}>
+            <div className={styles.searchBar}>
+                <FontAwesomeIcon icon={faSearch} />
+                <input type="text" name="search" placeholder="Search sprints" />
+            </div>
             <div className={styles.title}>
-                <h2>All Sprints Archived</h2>
-                <div>
+                <h2>Sprints</h2>
+                <Link to='/create-sprint'>
                     <FontAwesomeIcon icon={faPlus} />
-                    <Link to='/create-sprint'>Créer un nouveau sprint</Link>
-                </div>
+                    <p>Create sprint</p>
+                </Link>
             </div>
             <div className={styles.sprints}>
                 {
                     [...sprints].sort(sprint => isCurrent(sprint.startDate, sprint.endDate) ? -1 : 1).map((sprint, index) => {
+                        const percentage = (new Date().getTime() - new Date(sprint.startDate).getTime()) / (new Date(sprint.endDate).getTime() - new Date(sprint.startDate).getTime()) * 100;
+
                         return (
-                            <div key={index} className={`${styles.card} ${isCurrent(sprint.startDate, sprint.endDate) ? styles.current : styles.passed}`}>
-                                <FontAwesomeIcon icon={faPen} onClick={() => updateSprint(sprint.id)}  />
-                                <FontAwesomeIcon icon={faTrashCan} onClick={() => deleteSprint(sprint.id)} />
+                            <div key={index} className={styles.card}>
+                                <div className={styles.tools}>
+                                    <Link to={`/sprints/${sprint.id}`}><FontAwesomeIcon icon={faEye} /></Link>
+                                    <Link to={`/update-sprint/${sprint.id}`}><FontAwesomeIcon icon={faPen} /></Link>
+                                    <FontAwesomeIcon icon={faTrashCan} onClick={() => deleteSprint(sprint.title, sprint.id)} />
+                                </div>
                                 <h6>{sprint.title}</h6>
-                                <p>From {moment(sprint.startDate).format('Do MMMM YYYY')} to {moment(sprint.endDate).format('Do MMMM YYYY')} ({moment(sprint.endDate).fromNow()})</p>
-                                <div className={styles.infos}>
-                                    <p className={isCurrent(sprint.startDate, sprint.endDate) ? styles.current : styles.passed}>{isCurrent(sprint.startDate, sprint.endDate) ? "Current" : "Passed"}</p>
-                                    <Link to={`${sprint.id}`} className={styles.seeMore}>See more</Link>
+                                <div className={styles.time}>
+                                    <div className={styles.date}>
+                                        <p>Start: {moment(sprint.startDate).format("MMM Do YYYY")}</p>
+                                        <FontAwesomeIcon icon={faCircle} />
+                                        <p>End: {moment(sprint.endDate).format("MMM Do YYYY")}</p>
+                                    </div>
+                                    <div className={styles.progressBar}>
+                                        <div className={`${styles.done} ${percentage < 0 ? styles.notStarted : percentage < 70 ? styles.progress : percentage < 100 ? styles.nearEnd : styles.finished}`} style={{ width: `${percentage}%` }}></div>
+                                    </div>
+                                    <p>
+                                        {
+                                            percentage < 0 ? 'Not yet started'
+                                            : percentage < 70 ? 'In progress'
+                                            : percentage < 100 ? 'Near end' : 'Finished'
+                                        }
+                                    </p>
+                                </div>
+                                <div className={styles.update}>
+                                    <p>Last updated: {moment().format('Do MMMM YYYY')}</p>
+                                    <img src={defaultPicture} alt="member" />
                                 </div>
                             </div>
                         );
