@@ -15,6 +15,12 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [isLogin, setIsLogin] = useState(false);
+    const [tryConnect, setTryConnect] = useState(false);
+    const [emailErr, setEmailErr] = useState(false);
+    const [passwordErr, setPasswordErr] = useState(false);
+
+    const validEmail = new RegExp(/^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/);
+    const validPassword = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
 
     useEffect(() => {
         if (action === 'user/loginSuccess')
@@ -29,7 +35,20 @@ const Login = () => {
             password: password
         }
 
-        dispatch(userActions.login(data));
+        setTryConnect(true);
+        setEmailErr(!validEmail.test(email));
+        if (email.trim() !== '' && password.trim() !== '' && !emailErr)
+            dispatch(userActions.login(data));
+    }
+
+    const handlePassword = (e) => {
+        setPasswordErr(!validPassword.test(e.target.value));
+        setPassword(e.target.value);
+    }
+
+    const handleEmail = (e) => {
+        setEmailErr(!validEmail.test(e.target.value));
+        setEmail(e.target.value);
     }
 
     if (isLogin)
@@ -39,23 +58,29 @@ const Login = () => {
         <div className={styles.login}>
             <form className={styles.box}>
                 <h1>Sign In</h1>
-                <div className={styles.input}>
-                    <label htmlFor='email'>Email</label>
-                    <FontAwesomeIcon icon={faUser} />
-                    <input type="text" name="email" placeholder='Your email' onChange={(e) => setEmail(e.target.value)} />
-                </div>
-                <div className={styles.input}>
-                    <label htmlFor='password'>Password</label>
-                    <FontAwesomeIcon icon={faLock} />
-                    <input type={ seePasword ? "text" : "password" } name="password" placeholder='Your password' onChange={(e) => setPassword(e.target.value)} />
-                    <FontAwesomeIcon icon={seePasword ? faEye : faEyeSlash} onClick={(e) => { setSeePasword(!seePasword); }}/>
-                </div>
+                <label htmlFor='email'>Email
+                    <div className={styles.input}>
+                        <FontAwesomeIcon icon={faUser} />
+                        <input type="text" name="email" placeholder='Your email' onChange={handleEmail} />
+                    </div>
+                    { tryConnect && email.trim() === '' ? <i className={styles.error}>Email must not be empty</i> :
+                    emailErr ? <i className={styles.error}>Email is invalid</i> : <></> }
+                </label>
+                <label htmlFor='password'>Password
+                    <div className={styles.input}>
+                        <FontAwesomeIcon icon={faLock} />
+                        <input type={ seePasword ? "text" : "password" } name="password" placeholder='Your password' onChange={handlePassword} />
+                        <FontAwesomeIcon icon={seePasword ? faEye : faEyeSlash} onClick={(e) => { setSeePasword(!seePasword); }}/>
+                    </div>
+                    { passwordErr && password.trim() !== '' ? <i className={styles.error}>Password must contain at least 8 character, with one letter and one number</i> : <></> } 
+                    { tryConnect && password.trim() === '' ? <i className={styles.error}>Password must not be empty</i> : <></> }
+                </label>
                 <div className={styles.remember}>
                     <input type='checkbox' name='remember' defaultChecked={true} />
                     <label htmlFor='remember'>Remember me ?</label>
                 </div>
                 <input type="submit" value="Sign In" className={styles.button} onClick={handleLogin} />
-                <Link to='/forgot-password'>Forgot password ?</Link>
+                <Link to='#'>Forgot password ?</Link>
             </form>
         </div>
     );

@@ -34,52 +34,61 @@
                 color: t('text');
             }
         }
-        .input {
-            padding-left: 10px;
-            border-bottom: 1px solid #c0c0c0;
+        label {
+            font-size: 12px;
+            margin: 0;
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 400;
             margin-top: 60px;
             width: 100%;
-            svg {
-                font-size: 20px;
-                margin-left: 10px;
-                opacity: .4;
+            @include themed {
+                color: t('text');
+            }
+            .error {
+                font-style: normal;
+                font-size: 14px;
                 @include themed {
-                    color: t('text');
+                    color: t('error');
                 }
-                &:last-child {
-                    float: right;
-                    margin-right: 10px;
-                    opacity: 1;
-                    &:hover {
-                        cursor: pointer;
+            }
+            .input {
+                margin: 10px 0;
+                border-bottom: 1px solid #c0c0c0;
+                width: 100%;
+                display: flex;
+                svg {
+                    font-size: 20px;
+                    margin-left: 10px;
+                    opacity: .4;
+                    @include themed {
+                        color: t('text');
+                    }
+                    &:last-child {
+                        float: right;
+                        margin-right: 10px;
+                        opacity: 1;
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
-            }
-            label {
-                font-size: 12px;
-                margin: 0;
-                margin-bottom: 15px;
-                display: block;
-                font-weight: 400;
-                margin-left: 10px;
-                @include themed {
-                    color: t('text');
-                }
-            }
-            input {
-                &::placeholder {
-                    opacity: .6;
-                }
-                font-weight: 200;
-                font-size: 18px;
-                outline: none;
-                border: none;
-                padding-bottom: 10px;
-                padding-left: 10px;
-                margin-left: 10px;
-                @include themed {
-                    background: t('secondary');
-                    color: t('text');
+                input {
+                    &::placeholder {
+                        opacity: .6;
+                    }
+                    font-weight: 200;
+                    font-size: 18px;
+                    outline: none;
+                    border: none;
+                    width: 100%;
+                    padding-bottom: 10px;
+                    padding-left: 10px;
+                    margin-left: 10px;
+                    @include themed {
+                        background: t('secondary');
+                        color: t('text');
+                    }
                 }
             }
         }

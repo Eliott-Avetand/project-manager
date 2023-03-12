@@ -29,7 +29,6 @@ function login(properties) {
             })
             .catch(error => {
                 dispatch(failure(error));
-                toast.error(error?.response?.data?.message);
             }
         );
     };
