@@ -9,7 +9,7 @@ export class User extends Entities {
     @Column()
     username: string;
 
-    @Column({ unique: true })
+    @Column()
     email: string;
 
     @Column()

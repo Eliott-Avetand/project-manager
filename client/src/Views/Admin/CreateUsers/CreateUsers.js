@@ -7,9 +7,11 @@ import { Navigate } from 'react-router-dom';
 const CreateUsers = () => {
     const dispatch = useDispatch();
     const userReducer = useSelector(state => state.userReducer);
+    const validEmail = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$');
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [emailErr, setEmailErr] = useState(false);
     const [title, setTitle] = useState('');
     const [role, setRole] = useState('user');
     const [isSuccessful, setIsSuccessful] = useState(false);
@@ -24,7 +26,16 @@ const CreateUsers = () => {
             email: email,
         }
 
-        dispatch(userActions.create(data));
+        if (!emailErr)
+            dispatch(userActions.create(data));
+    }
+
+    const handleEmail = (e) => {
+        if (!validEmail.test(e.target.value))
+            setEmailErr(true);
+        else
+            setEmailErr(false);
+        setEmail(e.target.value)
     }
 
     useEffect(() => {
@@ -45,14 +56,18 @@ const CreateUsers = () => {
                 <label>
                     Name
                     <input type="text" placeholder='John' value={username} onChange={(e) => setUsername(e.target.value)} />
+                    { username === '' ? <i className={styles.error}>Field must not be empty</i> : <></> }
                 </label>
                 <label>
                     Email
-                    <input type="text" placeholder='example@gmail.com' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="text" placeholder='example@gmail.com' value={email} onChange={handleEmail} />
+                    { email === '' ? <i className={styles.error}>Field must not be empty</i> : 
+                    emailErr ? <i className={styles.error}>Invalid email provided.</i> : <></> }
                 </label>
                 <label>
                     Title
                     <input type="text" placeholder="L'ingénieur" value={title} onChange={(e) => setTitle(e.target.value)} />
+                    { title === '' ? <i className={styles.error}>Field must not be empty</i> : <></> }
                 </label>
                 <label>
                     Role

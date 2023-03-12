@@ -3,7 +3,6 @@ import { sprintActions } from '@actions/sprints.actions';
 import styles from './CreateSprints.module.scss';
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { userActions } from '@actions/users.actions';
 
 const CreateSprints = () => {
     const dispatch = useDispatch();
@@ -14,7 +13,9 @@ const CreateSprints = () => {
     const [endDate, setEndDate] = useState('');
     const [isSuccessful, setIsSuccessful] = useState(false);
 
-    const createSprint = () => {
+    const createSprint = (e) => {
+        e.preventDefault();
+
         const data = {
             title: title,
             startDate: startDate,

@@ -1,18 +1,16 @@
 import styles from './Sprints.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faEye, faPen, faPlus, faSearch, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { sprintActions } from '@actions/sprints.actions';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import moment from 'moment';
 import defaultPicture from '@assets/Images/defaultPicture.png';
 
 const Sprints = () => {
     const dispatch = useDispatch();
     const sprints = useSelector(state => state.sprintsReducer.sprints);
-    const [isUpdate, setIsUpdate] = useState();
-    const [updateSprintId, setUpdateSprintId] = useState();
 
     const isCurrent = (startDate, endDate) => {
         if (new Date(startDate).getTime() <= new Date().getTime() && new Date().getTime() <= new Date(endDate).getTime())

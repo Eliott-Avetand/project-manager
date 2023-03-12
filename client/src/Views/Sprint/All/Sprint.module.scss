@@ -1,9 +1,6 @@
 @import "../../../styles/theme";
 
-.sprints {
-    @include themed {
-        background: t('primary');
-    }
+.sprint {
     width: 100%;
     height: 100vh;
     margin: 0;
@@ -12,6 +9,9 @@
     overflow: auto;
     flex-direction: column;
     box-sizing: border-box;
+    @include themed {
+        background: t("primary");
+    }
     &::-webkit-scrollbar {
         width: 5px;
     }
@@ -94,37 +94,25 @@
             }
         }
     }
-    .sprints {
+    .cards {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
         flex-wrap: wrap;
         padding: 0;
         margin-top: 30px;
         .card {
             padding: 10px;
             margin: 20px 0;
-            width: 30%;
+            width: 20%;
+            position: relative;
             height: fit-content;
+            border-radius: 5px;
             @include themed {
                 background: t('secondary');
             };
-            .tools {
-                margin-bottom: 20px;
-                display: flex;
-                justify-content: flex-end;
-                svg {
-                    margin: 0px 5px;
-                    font-size: 18px;
-                    opacity: .6;
-                    @include themed {
-                        color: t('text');
-                    };
-                    &:hover {
-                        opacity: 1;
-                        cursor: pointer;
-                    }
-                }
+            &:hover {
+                opacity: .9;
+                cursor: pointer;
             }
             h6 {
                 font-size: 18px;
@@ -134,69 +122,29 @@
                     color: t('text');
                 };
             }
-            .time {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                .date {
-                    display: flex;
-                    align-items: center;
-                    font-size: 16px;
-                    opacity: .8;
-                    @include themed {
-                        color: t('text');
-                    };
-                    svg {
-                        font-size: 5px;
-                        margin: 0px 20px;
-                    }
-                    p {
-                        margin: 20px 0 10px;
-                    }
-                }
-                .progressBar {
-                    width: 100%;
-                    height: 5px;
-                    border-radius: 10px;
-                    overflow: hidden;
-                    @include themed {
-                        background: rgba(0, 0, 0, .5);
-                    };
-                    .done {
-                        height: 5px;
-                        border-radius: 10px;
-                        &.progress {
-                            @include themed {
-                                background: t('success');
-                            };
-                        }
-                        &.nearEnd {
-                            @include themed {
-                                background: t('warning');
-                            };
-                        }
-                        &.finished {
-                            @include themed {
-                                background: t('error');
-                            };
-                        }
-                    }
-                }
-                & > p {
-                    margin-top: 10px;
-                    align-self: start;
-                    @include themed {
-                        color: t('text');
-                    };
-                }
+            p {
+                word-wrap: break-word;
+                font-size: 14px;
+                font-weight: 200;
+                @include themed {
+                    color: t('text');
+                };
+            }
+            i {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 12px;
+                @include themed {
+                    color: t('text');
+                };
             }
             .update {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin-top: 50px;
                 p {
-                    opacity: .6;
+                    opacity: .8;
                     @include themed {
                         color: t('text');
                     };
@@ -207,5 +155,21 @@
                 }
             }
         }
+    }
+    .Modal {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        right: 40px;
+        bottom: 40px;
+        background-color: papayawhip;
+    }
+    .Overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rebeccapurple;
     }
 }

@@ -7,12 +7,9 @@ export class Task extends Entities {
     @Column()
     description: string;
 
-    @Column()
+    @Column({ default: false })
     done: boolean;
 
-    @ManyToOne(() => Card, (card) => card.tasks, {
-        onDelete: "CASCADE"
-    })
-    @JoinColumn()
-    card: number;
+    @ManyToOne(() => Card, card => card.tasks, { lazy: true, onDelete: 'CASCADE' })
+    card: Card;
 }

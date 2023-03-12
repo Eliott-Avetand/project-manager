@@ -62,7 +62,7 @@ const Dashboard = () => {
                         <h4>Current sprint’s cards</h4>
                         <p>All cards of the current sprint</p>
                     </div>
-                    <Link to={isCurrentSprint ? `/sprints/${currentSprint.id}/cards` : '/dashboard'}>View cards</Link>
+                    <Link to={isCurrentSprint ? `/sprints/${currentSprint.id}` : '/dashboard'} state={currentSprint}>View cards</Link>
                 </div>
                 <div className={styles.cardsInfos}>
                     <div className={styles.number}>

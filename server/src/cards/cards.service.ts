@@ -10,16 +10,14 @@ export class CardsService {
     constructor(@InjectRepository(Card) private card: Repository<Card>) { };
 
     create(createCardDto: CreateCardDto) {
-        return 'This action adds a new card';
-    }
-
-    findAll() {
-        return this.card.find();
+        this.card.save(createCardDto);
+        return createCardDto;
     }
 
     findBySprint(sprintId: number): Promise<Card[]> {
-        return this.card.find({ where: { sprint: sprintId }});
+        return this.card.find({ relations: { sprint: true, workers: true }, where: { sprint: { id: sprintId } } })  
     }
+
     findOne(id: number) {
         return `This action returns a #${id} card`;
     }

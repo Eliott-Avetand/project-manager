@@ -8,6 +8,7 @@ export class CreateCardDto {
     to: string;
     description: string;
     length: number;
-    workers: User[];
+    workers: any[];
     tasks: Task[];
+    sprintId: number;
 }

@@ -43,8 +43,6 @@ export class SprintsController {
 
     @Get(':id')
     findOne(@Param('id') id: number) {
-        console.log('bonjour');
-        
         return this.sprintsService.findOne(+id);
     }
 

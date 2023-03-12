@@ -1,8 +1,9 @@
+import { Exclude } from "class-transformer";
 import { Sprint } from "src/sprints/entities/sprint.entity";
 import { Task } from "src/tasks/entities/task.entity";
 import { User } from "src/users/entities/user.entity";
 import { Entities } from "src/utilities/GenericEntities";
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from "typeorm";
 
 @Entity()
 export class Card extends Entities {
@@ -24,16 +25,15 @@ export class Card extends Entities {
     @Column()
     length: number;
 
-    @ManyToMany(() => User)
+    @ManyToMany(() => User, { eager: true, cascade: true })
+    @JoinTable()
     workers: User[];
 
-    @OneToMany(() => Task, (task) => task.card, {
-    })
+    @OneToMany(() => Task, task => task.card, { eager: true, cascade: true, onDelete: 'CASCADE' })
+    @JoinColumn()
     tasks: Task[];
     
-    @ManyToOne(() => Sprint, (sprint) => sprint.cards, {
-        onDelete: "CASCADE"
-    })
+    @ManyToOne(() => Sprint, sprint => sprint.cards, { onDelete: "CASCADE" })
     @JoinColumn()
-    sprint: number;
+    sprint: Sprint;
 }

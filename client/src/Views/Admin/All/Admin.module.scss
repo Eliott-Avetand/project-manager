@@ -75,27 +75,10 @@
 
         thead {
             border-bottom: 2px solid rgba(0, 0, 0, .1);
-
-            @include themed {
-                background: t('primary');
-            }
-
             height: 50px;
             font-size: 14px;
-
-            tr th:nth-child(1) {
-                input {
-                    margin: 0;
-                    margin-left: 20px;
-                    margin-right: 10px;
-                    height: 20px;
-                    width: 20px;
-                    vertical-align: middle;
-
-                    @include themed {
-                        accent-color: t('button');
-                    }
-                }
+            @include themed {
+                background: t('primary');
             }
         }
 
@@ -103,47 +86,30 @@
             td {
                 height: 100px;
             }
-
             tr {
                 &:not(tr:last-child) {
                     border-bottom: 2px solid rgba(0, 0, 0, .1);
                 }
-
                 td:nth-child(1) {
+                    margin-left: 20px;
                     display: flex;
                     align-items: center;
                     align-content: center;
-
                     img {
                         width: 50px;
                         height: 50px;
                         margin-right: 10px;
                     }
-                    input {
-                        margin: 0;
-                        margin-left: 20px;
-                        vertical-align: middle;
-                        margin-right: 10px;
-                        height: 20px;
-                        width: 20px;
-                        @include themed {
-                            accent-color: t('button');
-                        }
-                    }
-
                     div {
                         margin-left: 5px;
-
                         p {
                             margin: 0;
                         }
                     }
                 }
-
                 .role {
                     text-transform: capitalize;
                 }
-
                 td:last-child {
                     a {
                         text-decoration: none;

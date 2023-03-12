@@ -4,10 +4,12 @@ import logger from 'redux-logger';
 
 import userReducer from '@reducers/users.reducers';
 import sprintsReducer from '@reducers/sprints.reducer';
+import cardsReducer from '@reducers/cards.reducer';
 
 const reducer = combineReducers({
     userReducer: userReducer,
     sprintsReducer: sprintsReducer,
+    cardsReducer: cardsReducer,
 });
 
 const preloadedState = {};

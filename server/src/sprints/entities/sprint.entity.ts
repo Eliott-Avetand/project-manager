@@ -13,7 +13,7 @@ export class Sprint extends Entities {
     @Column()
     endDate: Date;
 
-    @OneToMany(() => Card, card => card.sprint)
+    @OneToMany(() => Card, card => card.sprint, { onDelete: 'CASCADE' })
     @JoinColumn()
-    cards: Card[]
+    cards: Card[];
 }

@@ -19,7 +19,6 @@ const Table = ({ users }) => {
         <table>
             <thead>
                 <tr>
-                    <th><input type="checkbox" name="name" />Name</th>
                     <th>Title</th>
                     <th>Creation date</th>
                     <th>Role</th>
@@ -31,7 +30,6 @@ const Table = ({ users }) => {
                     users.map((user, index) => {
                         return <tr key={index}>
                             <td>
-                                <input type="checkbox" name="name" />
                                 <img src={user.picture !== null ? URL.createObjectURL(new Blob([user.picture])) : defaultPicture} alt="profil" />
                                 <div>
                                     <strong>{user.username}</strong>
