@@ -1,53 +1,75 @@
 import styles from './Admin.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPen, faTrash, faLock } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '@actions/users.actions';
-import moment from 'moment';
-import defaultPicture from '@assets/Images/defaultPicture.png';
+import Modal from '@components/Modal/Modal';
 
 const Table = ({ users }) => {
     const dispatch = useDispatch();
+    const [displayPassword, setDisplayPassword] = useState(false);
+    const [password, setPassword] = useState('');
 
     const deleteUser = (username, id) => {
         dispatch(userActions.remove(username, id));
     }
 
+    const generatePassword = (id) => {
+        let result = '';
+        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/*-+@(){}[]:;!%';
+
+        for (let i = 0; i < 12; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        setDisplayPassword(true);
+        setPassword(result);
+        dispatch(userActions.update(result, id));
+    }
+
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Creation date</th>
-                    <th>Role</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    users.map((user, index) => {
-                        return <tr key={index}>
-                            <td>
-                                <img src={user.picture !== null ? URL.createObjectURL(new Blob([user.picture])) : defaultPicture} alt="profil" />
-                                <div>
-                                    <strong>{user.username}</strong>
-                                    <p>{user.email}</p>
-                                </div>
-                            </td>
-                            <td>{user.title}</td>
-                            <td>{moment(new Date(user.created_at)).format('MMMM Do YYYY')}</td>
-                            <td className={styles.role}>{user.role}</td>
-                            <td>
-                                <Link to={`/update-user/${user.id}`}><FontAwesomeIcon icon={faPen} /></Link>
-                                <FontAwesomeIcon icon={faTrash} onClick={() => deleteUser(user.username, user.id)} />
-                            </td>
-                        </tr>
-                    })
-                }
-            </tbody>
-        </table>
+        <>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Creation date</th>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        users.map((user, index) => {
+                            return <tr key={index}>
+                                <td>
+                                    <div>
+                                        <strong>{user.username}</strong>
+                                        <p>{user.email}</p>
+                                    </div>
+                                </td>
+                                <td>{user.title}</td>
+                                <td className={styles.role}>{user.role}</td>
+                                <td>
+                                    <Link to={`/update-user/${user.id}`}><FontAwesomeIcon icon={faPen} /></Link>
+                                    <FontAwesomeIcon icon={faTrash} onClick={() => deleteUser(user.username, user.id)} />
+                                    <FontAwesomeIcon icon={faLock} onClick={() => generatePassword(user.id)} />
+                                </td>
+                            </tr>
+                        })
+                    }
+                </tbody>
+            </table>
+            { displayPassword ?
+                <Modal
+                    display={setDisplayPassword}
+                    title="Password successfully generated!"
+                    footer={<input type="submit" value="Ok" onClick={() => setDisplayPassword(false)} />}
+                    content={<>The password is now: <strong>${password}</strong></>}
+                />
+            : <></> }
+        </>
     )
 }
 
