@@ -52,6 +52,28 @@ export default function cardsReducer(state = initialState, action) {
                 loading: false,
                 error: action.error
             };
+        // Update task
+        case 'cards/updateTaskRequest':
+            return {
+                ...state,
+                action: action.type,
+                loading: true
+            };
+        case 'cards/updateTaskSuccess':
+            return {
+                ...state,
+                action: action.type,
+                loading: false,
+                error: {},
+                task: action.task
+            };
+        case 'cards/updateTaskFailure':
+            return {
+                ...state,
+                action: action.type,
+                loading: false,
+                error: action.error
+            };
         // Clear redux
         case 'cards/clearSuccess':
             return {

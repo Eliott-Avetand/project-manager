@@ -19,8 +19,8 @@ export class TasksService {
         return `This action returns all tasks`;
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} task`;
+    async findOne(id: number): Promise<Task | undefined> {
+        return this.task.findOne({ relations: { card: true }, where: { id: id } });
     }
 
     findByCard(card: Card): Promise<Task[]> {
@@ -28,7 +28,7 @@ export class TasksService {
     }
 
     update(id: number, updateTaskDto: UpdateTaskDto) {
-        return `This action updates a #${id} task`;
+        this.task.update(id, updateTaskDto);
     }
 
     remove(id: number) {

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 export const cardActions = {
     create,
     getAll,
+    updateTask,
     clearSuccess
 };
 
@@ -37,6 +38,25 @@ function getAll(sprintId) {
         cardsServices.getAll(sprintId)
             .then(cards => {
                 dispatch(success(cards));
+            })
+            .catch(error => {
+                console.log(error);
+                dispatch(failure(error));
+            }
+        );
+    };
+}
+
+function updateTask(taskId, taskUpdated) {
+    const request = () => ({ type: 'cards/updateTaskRequest' });
+    const success = (task) => ({ type: 'cards/updateTaskSuccess', task });
+    const failure = (error) => ({ type: 'cards/updateTaskFailure', error });
+
+    return dispatch => {
+        dispatch(request());
+        cardsServices.updateTask(taskId, taskUpdated)
+            .then(task => {
+                dispatch(success(task));
             })
             .catch(error => {
                 console.log(error);

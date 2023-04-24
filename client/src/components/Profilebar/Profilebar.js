@@ -11,8 +11,8 @@ const Profilebar = ({ userId }) => {
     const user = useSelector(state => state.userReducer.userInfos)
 
     useEffect(() => {
-        if (userId)
-            dispatch(userActions.getProfilePicture(userId));
+        // if (userId)
+        //     dispatch(userActions.getProfilePicture(userId));
     }, [dispatch, userId]);
 
     return (

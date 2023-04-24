@@ -15,6 +15,7 @@ const CreateCard = () => {
     const { id } = useParams();
 
     const [cardName, setCardName] = useState('');
+    const [category, setCategory] = useState('');
     const [title, setTitle] = useState('');
     const [as, setAs] = useState('');
     const [to, setTo] = useState('');
@@ -31,6 +32,7 @@ const CreateCard = () => {
 
         const data = {
             cardName: cardName,
+            category: category,
             title: title,
             as: as,
             to: to,
@@ -82,10 +84,14 @@ const CreateCard = () => {
                         <input type="text" placeholder='PLD-1' onChange={(e) => setCardName(e.target.value)} />
                     </label>
                     <label>
-                        Card's name
-                        <input type="text" placeholder='Create the main menu' onChange={(e) => setTitle(e.target.value)} />
+                        Category
+                        <input type="text" placeholder='Externe' onChange={(e) => setCategory(e.target.value)} />
                     </label>
                 </div>
+                <label>
+                    Card's name
+                    <input type="text" placeholder='Create the main menu' onChange={(e) => setTitle(e.target.value)} />
+                </label>
                 <div>
                     <label>
                         As a

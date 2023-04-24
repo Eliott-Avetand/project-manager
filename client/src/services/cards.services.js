@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 export const cardsServices = {
     create,
     getAll,
+    updateTask,
 };
 
 function create(sprintId, properties) {
@@ -15,6 +16,12 @@ function create(sprintId, properties) {
 
 function getAll(sprintId) {
     return Api.get(`/sprints/${sprintId}/cards`)
+        .then(res => handleResponse(res))
+        .catch(err => handleError(err));
+}
+
+function updateTask(taskId, taskUpdated) {
+    return Api.patch(`/tasks/${taskId}`, taskUpdated)
         .then(res => handleResponse(res))
         .catch(err => handleError(err));
 }

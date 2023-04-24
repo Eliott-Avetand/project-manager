@@ -1,6 +1,6 @@
 import styles from './Sprints.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faEye, faPen, faPlus, faSearch, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faEye, faPen, faPlus, faSearch, faTrashCan, faFileExport } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { sprintActions } from '@actions/sprints.actions';
@@ -20,6 +20,10 @@ const Sprints = () => {
 
     const deleteSprint = (name, id) => {
         dispatch(sprintActions.remove(name, id))
+    }
+
+    const exportFile = () => {
+
     }
 
     useEffect(() => {
@@ -47,6 +51,7 @@ const Sprints = () => {
                         return (
                             <div key={index} className={styles.card}>
                                 <div className={styles.tools}>
+                                    <Link to={`/sprints/${sprint.id}/export`}><FontAwesomeIcon icon={faFileExport} /></Link>
                                     <Link to={`/sprints/${sprint.id}`}><FontAwesomeIcon icon={faEye} /></Link>
                                     <Link to={`/update-sprint/${sprint.id}`}><FontAwesomeIcon icon={faPen} /></Link>
                                     <FontAwesomeIcon icon={faTrashCan} onClick={() => deleteSprint(sprint.title, sprint.id)} />

@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './ModalCard.module.scss';
 import defaultPicture from '@assets/Images/defaultPicture.png';
+import { cardActions } from '@actions/cards.actions';
 
 const ModalCard = ({ isOpen, onRequestClose, card }) => {
+    const dispatch = useDispatch();
+
     useEffect(() => {
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains(`${styles.modal}`))
@@ -13,9 +17,12 @@ const ModalCard = ({ isOpen, onRequestClose, card }) => {
     if (!isOpen)
         return <></>
 
-    const changeTaskStatus = () => {}
+    const changeTaskStatus = (taskId, task) => {
+        const newTask = { description: task.description, done: !task.done };
 
-    console.log(card);
+        dispatch(cardActions.updateTask(taskId, newTask));
+    }
+
     return (<div className={styles.modal}>
         <div className={styles.box}>
             <div className={styles.title}>
@@ -57,7 +64,7 @@ const ModalCard = ({ isOpen, onRequestClose, card }) => {
                 <ul>
                     {
                         card.tasks.map((task, index) => {
-                            return <li key={index}><input type="checkbox" checked={task.done} onChange={(e, index) => changeTaskStatus(index)} />{task.description}</li>
+                            return <li key={index}><input type="checkbox" checked={task.done} onChange={(e) => changeTaskStatus(task.id, task)} />{task.description}</li>
                         })
                     }
                 </ul>

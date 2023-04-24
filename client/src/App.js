@@ -13,7 +13,7 @@ import styles from './App.module.scss';
 const App = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const noNavbar = ['/auth/login'];
+    const noNavbar = ['/auth/login', '/sprints/1/export'];
     const { isDark } = useContext(ThemeContext);
     const [isLogout, setIsLogout] = useState(false);
     const action = useSelector(state => state.userReducer.action);

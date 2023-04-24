@@ -41,20 +41,38 @@ const Sprint = () => {
                 </Link>
             </div>
             <div className={styles.cards}>
-                {
-                    cards.map((card, index) => {
-                        return <div key={index} className={styles.card} onClick={() => { setModalIsOpen(true); setCardInfo({...card, sprintName: sprint.title }) }}>
-                            <h6>{card.title}</h6>
-                            <p>{card.description}</p>
-                            <i>{card.length}j/h</i>
-                            <div className={styles.update}>
-                                <p>Last updated: {moment(new Date(card.modified_at)).format('Do MMMM YYYY')}</p>
-                                <img src={defaultPicture} alt="member" />
+                <h3>En cours</h3>
+                <div>
+                    {
+                        cards.filter(card => !card.done).map((card, index) => {
+                            return <div key={index} className={styles.card} onClick={() => { setModalIsOpen(true); setCardInfo({...card, sprintName: sprint.title }) }}>
+                                <h6>{card.title}</h6>
+                                <p>{card.description}</p>
+                                <i>{card.length}j/h</i>
+                                <div className={styles.update}>
+                                    <p>Last updated: {moment(new Date(card.modified_at)).format('Do MMMM YYYY')}</p>
+                                    <img src={defaultPicture} alt="member" />
+                                </div>
                             </div>
-                        </div>
-                    })
-                }
-
+                        })
+                    }
+                </div>
+                <h3>Finis</h3>
+                <div>
+                    {
+                        cards.filter(card => card.done).map((card, index) => {
+                            return <div key={index} className={`${styles.card} ${styles.done}`} onClick={() => { setModalIsOpen(true); setCardInfo({...card, sprintName: sprint.title }) }}>
+                                <h6>{card.title}</h6>
+                                <p>{card.description}</p>
+                                <i>{card.length}j/h</i>
+                                <div className={styles.update}>
+                                    <p>Last updated: {moment(new Date(card.modified_at)).format('Do MMMM YYYY')}</p>
+                                    <img src={defaultPicture} alt="member" />
+                                </div>
+                            </div>
+                        })
+                    }
+                </div>
             </div>
             <ModalCard isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} card={cardInfo} />
         </div>

@@ -11,6 +11,9 @@ export class Card extends Entities {
     cardName: string;
 
     @Column()
+    category: string;
+
+    @Column()
     title: string;
 
     @Column()
@@ -24,6 +27,9 @@ export class Card extends Entities {
 
     @Column()
     length: number;
+
+    @Column({ default: false })
+    done: boolean;
 
     @ManyToMany(() => User, { eager: true, cascade: true })
     @JoinTable()

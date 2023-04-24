@@ -23,7 +23,8 @@ export class CardsService {
     }
 
     update(id: number, updateCardDto: UpdateCardDto) {
-        return `This action updates a #${id} card`;
+        this.card.update(id, updateCardDto);
+        return updateCardDto;
     }
 
     remove(id: number) {
