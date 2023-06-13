@@ -1,0 +1,78 @@
+@import "../../../styles/theme";
+
+.update {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include themed {
+        background: t('primary');
+    }
+    .box {
+        @include themed {
+            background: t('secondary');
+        }
+        display: flex;
+        flex-direction: column;
+        padding: 30px 40px;
+        align-items: center;
+        width: 500px;
+        margin-bottom: 20px;
+        h1 {
+            margin: 0;
+            margin-bottom: 20px;
+            @include themed {
+                color: t('text');
+            }
+        }
+        & > label {
+            font-weight: 400;
+            font-size: 15px;
+            width: 100%;
+            @include themed {
+                color: t('text');
+            }
+            margin-bottom: 30px;
+            input {
+                display: block;
+                margin-top: 5px;
+                outline: none;
+                border: 1px solid rgba(0, 0, 0, .2);
+                border-radius: 3px;
+                @include themed {
+                    background: t('primary');
+                    color: t('text');
+                }
+                letter-spacing: 1px;
+                padding: 10px 20px;
+                width: 100%;
+                box-sizing: border-box;
+                &::placeholder {
+                    opacity: .8;
+                }
+            }
+        }
+        .button {
+            outline: none;
+            border: none;
+            width: 100%;
+            border-radius: 50px;
+            height: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            @include themed {
+                background: t('button');
+                color: t('primary');
+            }
+            margin-top: 50px;
+            transition: box-shadow .3s;
+            &:hover {
+                box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.486);
+                cursor: pointer;
+            }
+        }
+    }
+}

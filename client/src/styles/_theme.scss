@@ -1,0 +1,66 @@
+$themes: (
+    "light": (
+        primary: #fbf7f4,
+        secondary: #fff,
+        button: #191918,
+        text: #191918,
+        gradientColor1: #7EE8FA,
+        gradientColor2: #EEC0C6,
+        gradientColor3: #E58C8A,
+        success: #29F63E,
+        warning: #F6D629,
+        error: #C71D1D,
+    ),
+    "dark": (
+        primary: #323131,
+        secondary: #191918,
+        button: #fbf7f4,
+        text: #fbf7f4,
+        gradientColor1: #325d64,
+        gradientColor2: #5f4d4f,
+        gradientColor3: #5c3837,
+        success: #29F63E,
+        warning: #F6D629,
+        error: #C71D1D,
+    ),
+);
+
+@mixin themed() {
+    @each $theme, $map in $themes {
+        :global(.theme--#{$theme}) & {
+            $theme-map: () !global;
+
+            @each $key,
+            $submap in $map {
+                $value: map-get(map-get($themes, $theme), "#{$key}");
+                $theme-map: map-merge($theme-map,
+                    ($key: $value,
+                    )) !global;
+            }
+            @content;
+            $theme-map: null !global;
+        }
+    }
+}
+
+@mixin gthemed() {
+    @each $theme, $map in $themes {
+        .theme--#{$theme} & {
+            $theme-map: () !global;
+
+            @each $key,
+            $submap in $map {
+                $value: map-get(map-get($themes, $theme), "#{$key}");
+                $theme-map: map-merge($theme-map,
+                    ($key: $value,
+                    )) !global;
+            }
+            @content;
+            $theme-map: null !global;
+        }
+    }
+}
+
+@function t($key) {
+    @return map-get($theme-map, $key);
+}

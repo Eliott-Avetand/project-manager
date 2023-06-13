@@ -1,0 +1,137 @@
+@import "../../../styles/theme";
+
+.admin {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    @include themed {
+        background: t('primary');
+    }
+
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px;
+        padding-bottom: 30px;
+        & > a {
+            margin-left: 50px;
+            display: flex;
+            align-items: center;
+            opacity: .6;
+            padding: 0px 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            @include themed {
+                color: t('text');
+            }
+            &:hover {
+                opacity: 1;
+            }
+            svg {
+                margin: 0;
+                margin-right: 10px;
+                padding: 5px;
+                border-radius: 50%;
+                @include themed {
+                    color: t('primary');
+                    background: t('button');
+                };
+            }
+            p {
+                @include themed {
+                    color: t('text');
+                };
+            }
+        }
+        @include themed {
+            color: t('text');
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 0;
+        }
+    }
+
+    table {
+        @include themed {
+            color: t('text');
+        }
+
+        border-collapse: collapse;
+        text-align: left;
+        width: 100%;
+
+        thead {
+            border-bottom: 2px solid rgba(0, 0, 0, .1);
+            height: 50px;
+            font-size: 14px;
+            @include themed {
+                background: t('primary');
+            }
+        }
+
+        tbody {
+            td {
+                height: 100px;
+            }
+            tr {
+                &:not(tr:last-child) {
+                    border-bottom: 2px solid rgba(0, 0, 0, .1);
+                }
+                td:nth-child(1) {
+                    margin-left: 20px;
+                    display: flex;
+                    align-items: center;
+                    align-content: center;
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        margin-right: 10px;
+                    }
+                    div {
+                        margin-left: 5px;
+                        p {
+                            margin: 0;
+                        }
+                    }
+                }
+                .role {
+                    text-transform: capitalize;
+                }
+                td:last-child {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    a {
+                        text-decoration: none;
+                    }
+
+                    svg {
+                        font-size: 20px;
+                        margin: 0 10px;
+
+                        @include themed {
+                            color: t('text');
+                        }
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

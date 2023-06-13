@@ -1,0 +1,195 @@
+@import "../../../styles/theme";
+.sprint {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    box-sizing: border-box;
+    @include themed {
+        background: t("primary");
+    }
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+        @include themed {
+            background: t('secondary');
+        }
+    }
+    &::-webkit-scrollbar-thumb {
+        @include themed {
+            background: t('button');
+        }
+    }
+    .searchBar {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        padding: 20px 10px;
+        box-sizing: border-box;
+        @include themed {
+            background: t('secondary');
+        }
+        svg {
+            font-size: 22px;
+            margin-right: 15px;
+            opacity: .6;
+            @include themed {
+                color: t('text');
+            }
+            ;
+        }
+        input {
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 16px;
+            font-weight: 500;
+            width: 100%;
+            @include themed {
+                color: t('text');
+            }
+        }
+    }
+    .title {
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        @include themed {
+            color: t('text');
+        }
+        h2 {
+            margin: 0;
+        }
+        &>a {
+            margin-left: 50px;
+            display: flex;
+            align-items: center;
+            opacity: .6;
+            padding: 0px 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            &:hover {
+                opacity: 1;
+            }
+            svg {
+                margin: 0;
+                margin-right: 10px;
+                padding: 5px;
+                border-radius: 50%;
+                @include themed {
+                    color: t('primary');
+                    background: t('button');
+                }
+                ;
+            }
+            p {
+                @include themed {
+                    color: t('text');
+                }
+                ;
+            }
+        }
+    }
+    .cards {
+        padding: 0;
+        margin-top: 30px;
+        h3 {
+            margin-top: 20px;
+            @include themed {
+                color: t('text');
+            }
+        }
+        &>div {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        &>div {
+            width: 100%;
+        }
+        .card {
+            padding: 10px;
+            margin: 0 10px;
+            width: 20%;
+            position: relative;
+            height: fit-content;
+            border-radius: 5px;
+            @include themed {
+                background: t('secondary');
+            }
+            &.done {
+                opacity: .5;
+            }
+            &:hover {
+                opacity: .9;
+                cursor: pointer;
+            }
+            h6 {
+                font-size: 18px;
+                font-weight: 400;
+                margin: 0;
+                @include themed {
+                    color: t('text');
+                }
+                ;
+            }
+            p {
+                word-wrap: break-word;
+                font-size: 14px;
+                font-weight: 200;
+                @include themed {
+                    color: t('text');
+                }
+                ;
+            }
+            i {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 12px;
+                @include themed {
+                    color: t('text');
+                }
+                ;
+            }
+            .update {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                p {
+                    opacity: .8;
+                    @include themed {
+                        color: t('text');
+                    }
+                    ;
+                }
+                img {
+                    width: 40px;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+    .Modal {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        right: 40px;
+        bottom: 40px;
+        background-color: papayawhip;
+    }
+    .Overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rebeccapurple;
+    }
+}
