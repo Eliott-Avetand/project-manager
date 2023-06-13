@@ -1,7 +1,6 @@
 import styles from './Dashboard.module.scss';
 import defaultPicture from '@assets/Images/defaultPicture.png';
 import { Link } from 'react-router-dom';
-import Profilebar from '@components/Profilebar/Profilebar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { sprintActions } from '@actions/sprints.actions';
@@ -27,37 +26,19 @@ const Dashboard = () => {
 
     return (
         <div className={styles.home}>
-            <div className={styles.current}>
-                <div className={styles.infos}>
-                    <h3>Current Sprint</h3>
-                    {
-                        isCurrentSprint
-                        ? <i>From <strong>{moment(new Date(currentSprint.startDate)).format('MMMM Do YYYY')}</strong> to <strong>{moment(new Date(currentSprint.endDate)).format('MMMM Do YYYY')}</strong></i>
-                        : <i>From <strong>{moment().format('MMMM Do YYYY')}</strong> to <strong>{moment().format('MMMM Do YYYY')}</strong></i>
-                    }
-                </div>
-                <h2>
-                    {
-                        isCurrentSprint
-                        ? currentSprint.title
-                        : 'There is no current sprint'
-                    }
-                </h2>
+            <div className={styles.infos}>
                 {
                     isCurrentSprint
-                    ? <div className={styles.update}>
-                        <div className={styles.profile}>
-                            <img src={defaultPicture} alt="user" />
-                            <p>Soryoz</p>
-                        </div>
-                        <div className={styles.date}>
-                            <p>Last update</p>
-                            <p>13:30 June 14th, 2023</p>
-                        </div>
-                    </div>
-                    : <></>
+                    ? <>
+                        <h2>{currentSprint.title}</h2>
+                        <i>From <strong>{moment(new Date(currentSprint.startDate)).format('MMMM Do YYYY')}</strong> to <strong>{moment(new Date(currentSprint.endDate)).format('MMMM Do YYYY')}</strong></i>
+                    </>
+                    : <h2>There is no current sprint</h2>
                 }
-                <div className={styles.cards}>
+            </div>
+            {
+                isCurrentSprint
+                ? <><div className={styles.cards}>
                     <div>
                         <h4>Current sprint’s cards</h4>
                         <p>All cards of the current sprint</p>
@@ -79,81 +60,9 @@ const Dashboard = () => {
                             }
                         </p>
                     </div>
-                </div>
-            </div>
-            <div className={styles.personal}>
-                <div className={styles.updates}>
-                    <h3>Your last updates</h3>
-                    <div className={styles.card}>
-                        <i className={styles.time}>2d</i>
-                        <div>
-                            <i className={styles.id}>CardID</i>
-                            <h6>Name of the card</h6>
-                        </div>
-                        <div>
-                            <p>Updated</p>
-                            <Link to='/dashboard'>view more</Link>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <i className={styles.time}>2d</i>
-                        <div>
-                            <i className={styles.id}>CardID</i>
-                            <h6>Name of the card</h6>
-                        </div>
-                        <div>
-                            <p>Updated</p>
-                            <Link to='/dashboard'>view more</Link>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <i className={styles.time}>2d</i>
-                        <div>
-                            <i className={styles.id}>CardID</i>
-                            <h6>Name of the card</h6>
-                        </div>
-                        <div>
-                            <p>Updated</p>
-                            <Link to='/dashboard'>view more</Link>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.statistics}>
-                    <h3>Your account</h3>
-                    <p>Some stats about you</p>
-                    <div className={styles.statBlocs}>
-                        <div className={styles.bloc}>
-                            <div className={styles.visual}></div>
-                            <div className={styles.info}>
-                                <h6>Task done</h6>
-                                <p>36 tasks finished</p>
-                            </div>
-                        </div>
-                        <div className={styles.bloc}>
-                            <div className={styles.visual}></div>
-                            <div className={styles.info}>
-                                <h6>Task done</h6>
-                                <p>36 tasks finished</p>
-                            </div>
-                        </div>
-                        <div className={styles.bloc}>
-                            <div className={styles.visual}></div>
-                            <div className={styles.info}>
-                                <h6>Task done</h6>
-                                <p>36 tasks finished</p>
-                            </div>
-                        </div>
-                        <div className={styles.bloc}>
-                            <div className={styles.visual}></div>
-                            <div className={styles.info}>
-                                <h6>Task done</h6>
-                                <p>36 tasks finished</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <Profilebar userId={userId} />
+                </div></>
+                : <Link to='/sprints' className={styles.noSprint}>Create a sprint</Link>
+            }
         </div>
     );
 }

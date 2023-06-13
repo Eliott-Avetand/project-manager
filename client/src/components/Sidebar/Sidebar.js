@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userActions } from '@actions/users.actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartSimple, faGear, faMoon, faRightFromBracket, faSun, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faChartSimple, faLocationArrow, faMoon, faRightFromBracket, faSun, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 import ThemeContext from '@styles/ThemeContext';
 import { useContext } from 'react';
@@ -26,7 +26,7 @@ const Sidebar = () => {
     }
 
     return (
-        <nav className={styles.sidebar}>
+        <nav className={styles.sidebar}><div className={styles.wrapper}>
             <div>
                 <div className={styles.logo}>
                     <img src={Logo} alt="Loustik Studio" />
@@ -35,12 +35,13 @@ const Sidebar = () => {
                 <ul className={styles.items}>
                     <Link to='/dashboard' onClick={handleActive}><li className={styles.active}><FontAwesomeIcon icon={faChartSimple} />Dashboard</li></Link>
                     <Link to='/sprints' onClick={handleActive}><li><FontAwesomeIcon icon={faCalendarCheck} />Sprints</li></Link>
+                    <Link to='/roadmap' onClick={handleActive}><li><FontAwesomeIcon icon={faLocationArrow} />Roadmap</li></Link>
                     <Link to='/admin-panel' onClick={handleActive}><li><FontAwesomeIcon icon={faUsers} />Admin Panel</li></Link>
                     <Link to='#' onClick={toggleDark}><li><FontAwesomeIcon icon={isDark ? faMoon : faSun} style={isDark ? { color: '#FEFCD7' } : { color: '#FDB813'}} />{isDark ? 'Dark mode' : 'Light mode'}</li></Link>
                 </ul>
             </div>
             <button className={styles.logout} onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} />Log out</button>
-        </nav>
+        </div></nav>
     );
 }
 

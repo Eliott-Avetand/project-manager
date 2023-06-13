@@ -22,10 +22,6 @@ const Sprints = () => {
         dispatch(sprintActions.remove(name, id))
     }
 
-    const exportFile = () => {
-
-    }
-
     useEffect(() => {
         dispatch(sprintActions.getAll());
     }, [dispatch]);
@@ -41,6 +37,10 @@ const Sprints = () => {
                 <Link to='/create-sprint'>
                     <FontAwesomeIcon icon={faPlus} />
                     <p>Create sprint</p>
+                </Link>
+                <Link to='/create-deliverable'>
+                    <FontAwesomeIcon icon={faPlus} />
+                    <p>Create deliverable</p>
                 </Link>
             </div>
             <div className={styles.sprints}>

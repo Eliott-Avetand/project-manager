@@ -13,7 +13,7 @@ import styles from './App.module.scss';
 const App = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const noNavbar = ['/auth/login', '/sprints/1/export'];
+    const noNavbar = ['/auth/login', new RegExp('/sprints/^[0-9]/export')];
     const { isDark } = useContext(ThemeContext);
     const [isLogout, setIsLogout] = useState(false);
     const action = useSelector(state => state.userReducer.action);
@@ -59,8 +59,8 @@ const App = () => {
 
     return (
         <div className={`${styles.app} ${isDark ? 'theme--dark' : 'theme--light'}`}>
-            { noNavbar.includes(location.pathname) ? <></> : <Sidebar /> }
-            <ToastContainer />
+            { noNavbar[0] === location.pathname || location.pathname.match(noNavbar[1]) ? <></> : <Sidebar /> }
+            {/* <ToastContainer /> */}
             <Routes>
                 {routes}
             </Routes>

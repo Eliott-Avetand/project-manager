@@ -1,4 +1,4 @@
-import { Exclude } from "class-transformer";
+import { Deliverable } from "src/deliverables/entities/deliverable.entity";
 import { Sprint } from "src/sprints/entities/sprint.entity";
 import { Task } from "src/tasks/entities/task.entity";
 import { User } from "src/users/entities/user.entity";
@@ -10,8 +10,9 @@ export class Card extends Entities {
     @Column()
     cardName: string;
 
-    @Column()
-    category: string;
+    @ManyToOne(() => Deliverable, deliverable => deliverable.cards, { onDelete: "CASCADE" })
+    @JoinColumn()
+    deliverable: Deliverable;
 
     @Column()
     title: string;
@@ -27,6 +28,12 @@ export class Card extends Entities {
 
     @Column()
     length: number;
+
+    @Column()
+    startDate: Date;
+
+    @Column()
+    endDate: Date;
 
     @Column({ default: false })
     done: boolean;

@@ -49,7 +49,7 @@ export class CardsController {
     @Get()
     @Roles(Role.Viewer)
     async findAll(@Param('sprintId') sprintId: number) {
-        const cards: Card[] = await this.cardsService.findBySprint(sprintId);
+        const cards: Card[] = sprintId === undefined ? await this.cardsService.findBySprint(sprintId) : await this.cardsService.findAll();
         const users = [];
 
         for (const card of cards) {

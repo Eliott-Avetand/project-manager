@@ -1,13 +1,14 @@
 import { Task } from "src/tasks/entities/task.entity";
-import { User } from "src/users/entities/user.entity";
 
 export class CreateCardDto {
     cardId: string;
-    category: string;
+    deliverableId: number;
     title: string;
     as: string;
     to: string;
     description: string;
+    startDate: Date;
+    endDate: Date;
     length: number;
     workers: any[];
     tasks: Task[];

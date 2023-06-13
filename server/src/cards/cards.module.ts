@@ -7,9 +7,10 @@ import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
 import { Task } from 'src/tasks/entities/task.entity';
 import { TasksService } from 'src/tasks/tasks.service';
+import { Deliverable } from 'src/deliverables/entities/deliverable.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Card, User, Task])],
+    imports: [TypeOrmModule.forFeature([Card, User, Task, Deliverable])],
     controllers: [CardsController],
     providers: [CardsService, UsersService, TasksService]
 })

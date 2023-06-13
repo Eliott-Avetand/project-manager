@@ -14,8 +14,12 @@ export class CardsService {
         return createCardDto;
     }
 
+    findAll(): Promise<Card[]> {
+        return this.card.find({ relations: { deliverable: true } });
+    }
+
     findBySprint(sprintId: number): Promise<Card[]> {
-        return this.card.find({ relations: { sprint: true, workers: true }, where: { sprint: { id: sprintId } } })  
+        return this.card.find({ relations: { sprint: true, workers: true, deliverable: true }, where: { sprint: { id: sprintId } } })  
     }
 
     findOne(id: number) {
