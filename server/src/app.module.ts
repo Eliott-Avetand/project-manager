@@ -13,6 +13,7 @@ import { File } from './Files/entities/file.entity';
 import { Deliverable } from './deliverables/entities/deliverable.entity';
 import { DeliverablesModule } from './deliverables/deliverables.module';
 import 'dotenv/config';
+import { readFileSync } from 'fs';
 
 @Module({
     imports: [
@@ -23,6 +24,10 @@ import 'dotenv/config';
             password: process.env.DB_PASSWORD,
             database: process.env.DB_DATABASE,
             entities: [User, Sprint, Card, Task, File, Deliverable],
+            // ssl: {
+            //     ca: readFileSync(process.env.SSL_CERTIFICATES),
+            // },
+            autoLoadEntities: true,
             synchronize: process.env.ENV == 'development'
         }),
         UsersModule,
