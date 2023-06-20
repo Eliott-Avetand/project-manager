@@ -3,13 +3,12 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import { readFileSync } from 'fs';
-import express from 'express';
 
 async function bootstrap() {
-    const httpsOptions = {
+    const httpsOptions = process.env.ENV === 'production' ? {
         key: readFileSync(process.env.SSL_KEY),
         cert: readFileSync(process.env.SSL_CERTIFICATE),
-    };
+    } : {};
     const app = await NestFactory.create<NestExpressApplication>(AppModule, { httpsOptions });
 
     app.enableCors({
@@ -20,8 +19,6 @@ async function bootstrap() {
         allowedHeaders: "*"
     });
     app.use(cookieParser());
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
 
     await app.listen(8080);
 }
