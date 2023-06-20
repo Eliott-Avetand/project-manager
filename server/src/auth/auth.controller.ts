@@ -29,7 +29,7 @@ export class AuthController {
         const expiresTime = new Date();
 
         expiresTime.setDate(expiresTime.getDate() + 1);
-        response.cookie('token', token, { expires: expiresTime, secure: true, sameSite: 'none', httpOnly: false, domain: 'loustik-manager.fr' });
+        response.cookie('token', token, process.env.ENV === 'development' ? { expires: expiresTime } : { expires: expiresTime, secure: true, sameSite: 'none', httpOnly: false, domain: 'loustik-manager.fr' });
         return response.send(data);
     }
 

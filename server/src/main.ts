@@ -9,14 +9,11 @@ async function bootstrap() {
         key: readFileSync(process.env.SSL_KEY),
         cert: readFileSync(process.env.SSL_CERTIFICATE),
     } : {};
-    const app = await NestFactory.create<NestExpressApplication>(AppModule, { httpsOptions });
+    const app = await NestFactory.create<NestExpressApplication>(AppModule, process.env.ENV === 'production' ? { httpsOptions } : {});
 
     app.enableCors({
         origin: ['http://localhost:3000', 'https://loustik-manager.fr'],
         credentials: true,
-        methods: "GET, POST, OPTIONS, PUT, DELETE",
-        optionsSuccessStatus: 200,
-        allowedHeaders: "*"
     });
     app.use(cookieParser());
 

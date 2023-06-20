@@ -17,10 +17,6 @@ export const userService = {
 
 function login(properties) {
     return Api.post('/auth/login', properties)
-        .then(res => {
-            if (res.status === 200 || res.status === 201)
-                localStorage.setItem('user', res.data.id);
-        })
         .then(res => handleResponse(res))
         .catch(err => handleError(err));
 }
@@ -86,10 +82,9 @@ const handleResponse = (res) => {
 
 const handleError = (err) => {
     if (err.response.status === 401) {
-        localStorage.removeItem('user');
         Cookies.remove('token');
         if (window.location.pathname !== '/auth/login')
-        window.location.href='/auth/login';
+            window.location.href='/auth/login';
     }
     toast.error(err?.response?.data?.message ? err.response.data.message : 'An error occured');
     throw err;
