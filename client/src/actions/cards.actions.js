@@ -6,6 +6,7 @@ export const cardActions = {
     getAll,
     getAllDeliverables,
     updateTask,
+    remove,
     clearSuccess
 };
 
@@ -77,6 +78,26 @@ function updateTask(taskId, taskUpdated) {
         cardsServices.updateTask(taskId, taskUpdated)
             .then(task => {
                 dispatch(success(task));
+            })
+            .catch(error => {
+                console.log(error);
+                dispatch(failure(error));
+            }
+        );
+    };
+}
+
+function remove(sprintId, cardId) {
+    const request = () => ({ type: 'cards/removeRequest' });
+    const success = () => ({ type: 'cards/removeSuccess' });
+    const failure = (error) => ({ type: 'cards/removeFailure', error });
+
+    return dispatch => {
+        dispatch(request());
+        cardsServices.remove(sprintId, cardId)
+            .then(card => {
+                dispatch(success(card));
+                toast.success(`The card ${cardId} has been removed.`);
             })
             .catch(error => {
                 console.log(error);

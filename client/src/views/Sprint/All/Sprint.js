@@ -27,6 +27,10 @@ const Sprint = () => {
         dispatch(sprintActions.getOne(id));
     }, [dispatch]);
 
+    useEffect(() => {
+        dispatch(cardActions.getAll(id));
+    }, [cards]);
+
     return (
         <div className={styles.sprint}>
             <div className={styles.searchBar}>

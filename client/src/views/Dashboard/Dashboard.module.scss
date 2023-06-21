@@ -25,6 +25,16 @@
             color: t('text');
         }
     }
+    .infos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 600;
+        font-style: 20px;
+        @include themed {
+            color: t('text');
+        }
+    }
     .noSprint {
         text-decoration: none;
         font-size: 18px;

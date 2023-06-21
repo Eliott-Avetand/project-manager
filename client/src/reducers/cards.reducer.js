@@ -74,6 +74,27 @@ export default function cardsReducer(state = initialState, action) {
                 loading: false,
                 error: action.error
             };
+        // Delete card
+        case 'cards/removeRequest':
+            return {
+                ...state,
+                action: action.type,
+                loading: true
+            };
+        case 'cards/removeSuccess':
+            return {
+                ...state,
+                action: action.type,
+                loading: false,
+                error: {},
+            };
+        case 'cards/removeFailure':
+            return {
+                ...state,
+                action: action.type,
+                loading: false,
+                error: action.error
+            };
         // Clear redux
         case 'cards/clearSuccess':
             return {

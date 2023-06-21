@@ -10,7 +10,7 @@ import moment from 'moment';
 const Dashboard = () => {
     const dispatch = useDispatch();
     const sprintsReducer = useSelector(state => state.sprintsReducer);
-    const userId = useSelector(state => state.userReducer.userInfos.id);
+    const user = useSelector(state => state.userReducer.userInfos);
     const currentSprint = useSelector(state => state.sprintsReducer.sprint);
     const [isCurrentSprint, setIsCurrentSprint] = useState(false);
 
@@ -27,6 +27,7 @@ const Dashboard = () => {
     return (
         <div className={styles.home}>
             <div className={styles.infos}>
+                <div>
                 {
                     isCurrentSprint
                     ? <>
@@ -35,6 +36,8 @@ const Dashboard = () => {
                     </>
                     : <h2>There is no current sprint</h2>
                 }
+                </div>
+                <p>{user.username}</p>
             </div>
             {
                 isCurrentSprint

@@ -37,7 +37,8 @@ const Login = () => {
 
         setTryConnect(true);
         setEmailErr(!validEmail.test(email));
-        if (email.trim() !== '' && password.trim() !== '' && !emailErr)
+        setPasswordErr(!validPassword.test(password))
+        if (email.trim() !== '' && password.trim() !== '' && !emailErr && !passwordErr)
             dispatch(userActions.login(data));
     }
 

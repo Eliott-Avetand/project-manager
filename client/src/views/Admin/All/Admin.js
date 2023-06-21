@@ -18,10 +18,14 @@ const Table = ({ users }) => {
 
     const generatePassword = (id) => {
         let result = '';
-        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/*-+@(){}[]:;!%';
+        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        let numbers = '0123456789';
 
         for (let i = 0; i < 12; i++) {
             result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        for (let i = 0; i < 2; i++) {
+            result += numbers.charAt(Math.floor(Math.random() * numbers.length));
         }
         setDisplayPassword(true);
         setPassword(result);
@@ -66,7 +70,7 @@ const Table = ({ users }) => {
                     display={setDisplayPassword}
                     title="Password successfully generated!"
                     footer={<input type="submit" value="Ok" onClick={() => setDisplayPassword(false)} />}
-                    content={<>The password is now: <strong>${password}</strong></>}
+                    content={<>The password is now: <strong>{password}</strong></>}
                 />
             : <></> }
         </>

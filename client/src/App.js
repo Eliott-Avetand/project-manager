@@ -18,6 +18,7 @@ const App = () => {
     const { isDark } = useContext(ThemeContext);
     const [isLogout, setIsLogout] = useState(false);
     const action = useSelector(state => state.userReducer.action);
+    const user = useSelector(state => state.userReducer.userInfos);
 
     useEffect(() => {
         if (action === 'user/logoutSuccess')
@@ -60,7 +61,7 @@ const App = () => {
 
     return (
         <div className={`${styles.app} ${isDark ? 'theme--dark' : 'theme--light'}`}>
-            { noNavbar[0] === location.pathname || location.pathname.match(noNavbar[1]) ? <></> : <Sidebar /> }
+            { noNavbar[0] === location.pathname || location.pathname.match(noNavbar[1]) ? <></> : <Sidebar user={user} /> }
             {/* <ToastContainer /> */}
             <Routes>
                 {routes}

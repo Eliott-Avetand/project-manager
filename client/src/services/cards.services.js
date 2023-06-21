@@ -6,6 +6,7 @@ export const cardsServices = {
     create,
     getAll,
     updateTask,
+    remove,
 };
 
 function create(sprintId, properties) {
@@ -22,6 +23,12 @@ function getAll(sprintId) {
 
 function updateTask(taskId, taskUpdated) {
     return Api.patch(`/tasks/${taskId}`, taskUpdated)
+        .then(res => handleResponse(res))
+        .catch(err => handleError(err));
+}
+
+function remove(sprintId, cardId) {
+    return Api.delete(`/sprints/${sprintId}/cards/${cardId}`)
         .then(res => handleResponse(res))
         .catch(err => handleError(err));
 }

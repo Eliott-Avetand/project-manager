@@ -3,9 +3,18 @@ import { useDispatch } from 'react-redux';
 import styles from './ModalCard.module.scss';
 import defaultPicture from '@assets/Images/defaultPicture.png';
 import { cardActions } from '@actions/cards.actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useParams } from 'react-router-dom';
 
 const ModalCard = ({ isOpen, onRequestClose, card }) => {
     const dispatch = useDispatch();
+    const { id } = useParams();
+
+    const deleteCard = () => {
+        dispatch(cardActions.remove(id, card.id));
+        onRequestClose();
+    }
 
     useEffect(() => {
         document.addEventListener('click', (e) => {
@@ -25,6 +34,7 @@ const ModalCard = ({ isOpen, onRequestClose, card }) => {
 
     return (<div className={styles.modal}>
         <div className={styles.box}>
+            <FontAwesomeIcon className={styles.delete} icon={faTrash} onClick={deleteCard} />
             <div className={styles.title}>
                 <i>{card.cardName}</i>
                 <h2>{card.title}</h2>
