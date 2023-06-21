@@ -36,6 +36,7 @@ const Sidebar = () => {
                     <Link to='/dashboard' onClick={handleActive}><li className={styles.active}><FontAwesomeIcon icon={faChartSimple} />Dashboard</li></Link>
                     <Link to='/sprints' onClick={handleActive}><li><FontAwesomeIcon icon={faCalendarCheck} />Sprints</li></Link>
                     <Link to='/roadmap' onClick={handleActive}><li><FontAwesomeIcon icon={faLocationArrow} />Roadmap</li></Link>
+                    <Link to='/time' onClick={handleActive}><li><FontAwesomeIcon icon={faLocationArrow} />Time</li></Link>
                     <Link to='/admin-panel' onClick={handleActive}><li><FontAwesomeIcon icon={faUsers} />Admin Panel</li></Link>
                     <Link to='#' onClick={toggleDark}><li><FontAwesomeIcon icon={isDark ? faMoon : faSun} style={isDark ? { color: '#FEFCD7' } : { color: '#FDB813'}} />{isDark ? 'Dark mode' : 'Light mode'}</li></Link>
                 </ul>

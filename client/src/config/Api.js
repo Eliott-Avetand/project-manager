@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = process.env.mode === 'development' ? "http://localhost:8080" : 'https://api.loustik-manager.fr';
+const baseUrl = process.env.NODE_ENV === 'development' ? "http://localhost:8080" : 'https://api.loustik-manager.fr:8080';
 const instance = axios.create({ withCredentials: true });
 
 export const Api = {

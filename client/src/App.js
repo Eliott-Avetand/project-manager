@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './App.module.scss';
+import Dashboard from './views/Dashboard/Dashboard';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -63,6 +64,7 @@ const App = () => {
             {/* <ToastContainer /> */}
             <Routes>
                 {routes}
+                <Route path='*' element={<Dashboard />} />
             </Routes>
         </div>
     );

@@ -11,11 +11,13 @@ import UpdateSprints from '@views/Sprints/UpdateSprints/UpdateSprints';
 import Export from '@views/Sprints/Export/Export';
 import Roadmap from './views/Roadmap/Roadmap';
 import CreateDeliverable from './views/Sprints/CreateDeliverable/CreateDeliverable';
+import Time from './views/Time/Time';
 
 export const customRoutes = [
     { path: '/auth/login', component: Login, type: 'auth' },
     { path: '/dashboard', component: Dashboard, type: 'private' },
     { path: '/roadmap', component: Roadmap, type: 'private' },
+    { path: '/time', component: Time, type: 'private' },
     { path: '/admin-panel', component: Admin, type: 'private' },
     { path: '/create-user', component: CreateUsers, type: 'private' },
     { path: '/update-user/:id', component: UpdateUsers, type: 'private' },
