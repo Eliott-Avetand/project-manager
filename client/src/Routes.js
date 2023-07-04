@@ -12,6 +12,7 @@ import Export from '@views/Sprints/Export/Export';
 import Roadmap from './views/Roadmap/Roadmap';
 import CreateDeliverable from './views/Sprints/CreateDeliverable/CreateDeliverable';
 import Time from './views/Time/Time';
+import EditCard from './views/Sprint/EditCard/EditCard';
 
 export const customRoutes = [
     { path: '/auth/login', component: Login, type: 'auth' },
@@ -24,6 +25,7 @@ export const customRoutes = [
     { path: '/sprints/:id', component: Sprint, type: 'private' },
     { path: '/sprints/:id/export', component: Export, type: 'private' },
     { path: '/sprints/:id/create-card', component: CreateCard, type: 'private' },
+    { path: '/sprints/:id/cards/:cardId', component: EditCard, type: 'private' },
     { path: '/sprints', component: Sprints, type: 'private' },
     { path: '/create-sprint', component: CreateSprints, type: 'private' },
     { path: '/create-deliverable', component: CreateDeliverable, type: 'private' },

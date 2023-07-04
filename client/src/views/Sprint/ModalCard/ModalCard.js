@@ -4,8 +4,8 @@ import styles from './ModalCard.module.scss';
 import defaultPicture from '@assets/Images/defaultPicture.png';
 import { cardActions } from '@actions/cards.actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useParams } from 'react-router-dom';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Link, useParams } from 'react-router-dom';
 
 const ModalCard = ({ isOpen, onRequestClose, card }) => {
     const dispatch = useDispatch();
@@ -34,6 +34,7 @@ const ModalCard = ({ isOpen, onRequestClose, card }) => {
 
     return (<div className={styles.modal}>
         <div className={styles.box}>
+            <Link to={`/sprints/${id}/cards/${card.id}`} state={{ card: card }}><FontAwesomeIcon className={styles.edit} icon={faPen} /></Link>
             <FontAwesomeIcon className={styles.delete} icon={faTrash} onClick={deleteCard} />
             <div className={styles.title}>
                 <i>{card.cardName}</i>

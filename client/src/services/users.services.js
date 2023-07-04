@@ -8,6 +8,7 @@ export const userService = {
     create,
     update,
     getAll,
+    getAllWorkers,
     getOne,
     profil,
     setProfilePicture,
@@ -47,6 +48,12 @@ function profil() {
 
 function getAll() {
     return Api.get('/users')
+        .then(res => handleResponse(res))
+        .catch(err => handleError(err));
+}
+
+function getAllWorkers() {
+    return Api.get('/users/workers')
         .then(res => handleResponse(res))
         .catch(err => handleError(err));
 }

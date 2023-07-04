@@ -122,6 +122,21 @@ export class UsersController {
         return users;
     }
 
+    @Get('workers')
+    @Roles(Role.Viewer)
+    async findAllWorkers() {
+        const users: any[] = await this.usersService.findAllWorkers();
+
+        users.forEach(user => {
+            if (user?.picture?.path && user?.picture?.filename)
+                user.picture = new StreamableFile(createReadStream(`${user.picture.path}/${user.picture.filename}`));
+            else
+                user.picture = null;
+        }); 
+        
+        return users;
+    }
+
     @Get('profil')
     @Roles(Role.Viewer)
     async profil(@JwtUser() user: User) {

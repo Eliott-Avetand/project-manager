@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Card } from 'src/cards/entities/card.entity';
-import { Repository } from 'typeorm';
+import { And, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { Roles } from './roles/roles.enum';
 
 @Injectable()
 export class UsersService {
@@ -16,6 +17,13 @@ export class UsersService {
 
     findAll(): Promise<User[]> {
         return this.user.find();
+    }
+
+    findAllWorkers(): Promise<User[]> {
+        return this.user.find({ where: [
+            { role: Roles.User },
+            { role: Roles.Admin }
+        ]});
     }
 
     findOne(id: number): Promise<User | undefined> {

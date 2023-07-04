@@ -1,32 +1,38 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { cardActions } from '@actions/cards.actions';
 import { userActions } from '@actions/users.actions';
-import styles from './CreateCard.module.scss';
+import styles from './EditCard.module.scss';
 import React, { useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useParams } from 'react-router-dom';
 import Select from 'react-select'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { deliverableActions } from '@actions/deliverables.actions';
+import moment from 'moment';
 
-const CreateCard = () => {
+const EditCard = () => {
+    const location = useLocation()
     const dispatch = useDispatch();
     const userReducer = useSelector(state => state.userReducer);
     const cardsReducer = useSelector(state => state.cardsReducer);
     const deliverableReducer = useSelector(state => state.deliverablesReducer);
     const { id } = useParams();
+    const { card } = location.state
 
-    const [cardName, setCardName] = useState('');
-    const [deliverable, setDeliverable] = useState({});
-    const [title, setTitle] = useState('');
-    const [as, setAs] = useState('');
-    const [to, setTo] = useState('');
-    const [description, setDescription] = useState('');
-    const [length, setLength] = useState(0);
-    const [members, setMembers] = useState([]);
-    const [startDate, setStartDate] = useState(Date());
-    const [endDate, setEndDate] = useState(Date());
-    const [tasks, setTasks] = useState(['']);
+    console.log(card);
+    const [cardName, setCardName] = useState(card?.cardName);
+    const [deliverable, setDeliverable] = useState({ value: card?.deliverable.id, label: `${card?.deliverable?.name}` });
+    const [title, setTitle] = useState(card.title);
+    const [as, setAs] = useState(card.as);
+    const [to, setTo] = useState(card.to);
+    const [description, setDescription] = useState(card.description);
+    const [length, setLength] = useState(card.length);
+    const [members, setMembers] = useState(card.workers.map(worker => {
+        return { value: worker.id, label: `${worker.username} (${worker.email})` }
+    }));
+    const [startDate, setStartDate] = useState(moment(card.startDate).format('yyyy-MM-DD'));
+    const [endDate, setEndDate] = useState(moment(card.endDate).format('yyyy-MM-DD'));
+    const [tasks, setTasks] = useState(card.tasks);
 
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [membersOptions, setMembersOptions] = useState([]);
@@ -90,13 +96,13 @@ const CreateCard = () => {
         return <Navigate to={`/sprints/${id}`} />
 
     return (
-        <div className={styles.create}>
+        <div className={styles.edit}>
             <form className={styles.box}>
                 <h1>Create a card</h1>
                 <div>
                     <label>
                         Card ID
-                        <input type="text" placeholder='PLD-1' onChange={(e) => setCardName(e.target.value)} />
+                        <input type="text" placeholder='PLD-1' value={cardName} onChange={(e) => setCardName(e.target.value)} />
                     </label>
                     <label>
                         Deliverable
@@ -104,32 +110,33 @@ const CreateCard = () => {
                             name="deliverables"
                             options={deliverableOptions}
                             className={styles.members}
+                            value={deliverable}
                             onChange={(e) => setDeliverable(e)}
                         />
                     </label>
                 </div>
                 <label>
                     Card's name
-                    <input type="text" placeholder='Create the main menu' onChange={(e) => setTitle(e.target.value)} />
+                    <input type="text" placeholder='Create the main menu' value={title} onChange={(e) => setTitle(e.target.value)} />
                 </label>
                 <div>
                     <label>
                         As a
-                        <input type="text" placeholder='player' onChange={(e) => setAs(e.target.value)} />
+                        <input type="text" placeholder='player' value={as} onChange={(e) => setAs(e.target.value)} />
                     </label>
                     <label>
                         I would like to
-                        <input type="text" placeholder='Launch the game and arrive in a main menu' onChange={(e) => setTo(e.target.value)} />
+                        <input type="text" placeholder='Launch the game and arrive in a main menu' value={to} onChange={(e) => setTo(e.target.value)} />
                     </label>
                 </div>
                 <label>
                     Description
-                    <input type="textarea" placeholder='describe the context of the card...' onChange={(e) => setDescription(e.target.value)} />
+                    <input type="textarea" placeholder='describe the context of the card...' value={description} onChange={(e) => setDescription(e.target.value)} />
                 </label>
                 <div>
                     <label>
                         Length
-                        <input type="number" min='1' placeholder='3' onChange={(e) => setLength(e.target.value)} />
+                        <input type="number" min='1' placeholder='3' value={length} onChange={(e) => setLength(e.target.value)} />
                     </label>
                     <label>
                         Members assigned
@@ -138,6 +145,7 @@ const CreateCard = () => {
                             name="members"
                             options={membersOptions}
                             className={styles.members}
+                            value={members}
                             onChange={(e) => setMembers(e)}
                         />
                     </label>
@@ -179,4 +187,4 @@ const CreateCard = () => {
     );
 }
 
-export default CreateCard;
+export default EditCard;

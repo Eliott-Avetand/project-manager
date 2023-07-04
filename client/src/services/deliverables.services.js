@@ -26,7 +26,6 @@ const handleResponse = (res) => {
 
 const handleError = (err) => {
     if (err.response.status === 401) {
-        localStorage.removeItem('user');
         Cookies.remove('token');
         window.location.href='/auth/login';
     }

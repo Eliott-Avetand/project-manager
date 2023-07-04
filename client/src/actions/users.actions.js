@@ -7,6 +7,7 @@ export const userActions = {
     create,
     update,
     getAll,
+    getAllWorkers,
     getOne,
     profil,
     setProfilePicture,
@@ -99,6 +100,24 @@ function getAll() {
     return dispatch => {
         dispatch(request());
         userService.getAll()
+            .then(users => {
+                dispatch(success(users));
+            })
+            .catch(error => {
+                dispatch(failure(error));
+            }
+        );
+    };
+}
+
+function getAllWorkers() {
+    const request = () => ({ type: 'user/getAllWorkersRequest' });
+    const success = (users) => ({ type: 'user/getAllWorkersSuccess', users });
+    const failure = (error) => ({ type: 'user/getAllWorkersFailure', error });
+
+    return dispatch => {
+        dispatch(request());
+        userService.getAllWorkers()
             .then(users => {
                 dispatch(success(users));
             })

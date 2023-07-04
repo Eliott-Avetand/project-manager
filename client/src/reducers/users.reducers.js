@@ -113,6 +113,28 @@ export default function userReducer(state = initialState, action) {
                 loading: false,
                 error: action.error
             };
+        // GetAll workers
+        case 'user/getAllWorkersRequest':
+            return {
+                ...state,
+                action: action.type,
+                loading: true
+            };
+        case 'user/getAllWorkersSuccess':
+            return {
+                ...state,
+                action: action.type,
+                loading: false,
+                error: {},
+                users: action.users
+            };
+        case 'user/getAllWorkersFailure':
+            return {
+                ...state,
+                action: action.type,
+                loading: false,
+                error: action.error
+            };
         // GetOne user
         case 'user/getOneRequest':
             return {

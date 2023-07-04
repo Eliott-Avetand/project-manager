@@ -39,7 +39,7 @@ const Roadmap = () => {
     }
 
     useEffect(() => {   
-        dispatch(userActions.getAll());
+        dispatch(userActions.getAllWorkers());
         dispatch(deliverableActions.getAll());
         dispatch(cardActions.getAll());
     }, []);  
